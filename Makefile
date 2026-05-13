@@ -4,7 +4,7 @@ CFLAGS = -Wall -std=c99 -Isrc
 LIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
 
 TARGET = main
-SRC = main.c src/jogo.c src/cliente.c src/lista_encadeada.c
+SRC = main.c src/jogo.c src/cliente.c src/lista_encadeada.c src/menu.c
 
 all:
 	$(CC) $(SRC) -o $(TARGET) $(CFLAGS) $(LIBS)
