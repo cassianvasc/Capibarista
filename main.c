@@ -1,14 +1,27 @@
 #include "raylib.h"
+#include "jogo.h"
+#include "lista_encadeada.h"
 
-int main(void) {
-    InitWindow(800, 450, "raylib funcionando");
+int main(){
+    InitWindow(GetMonitorWidth(0), GetMonitorHeight(0), "Capibarista");
 
-    while (!WindowShouldClose()) {
+    SetTargetFPS(60);
+
+    Jogo jogo;
+
+    inicializarJogo(&jogo);
+
+    while(WindowShouldClose() == false){
+
+        atualizarJogo(&jogo);
+
         BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText("Hello, raylib olá!", 300, 200, 20, DARKGRAY);
+            ClearBackground(BEIGE);
+            desenharJogo(&jogo);
         EndDrawing();
     }
+
+    LiberarLista(&jogo.listaClientes);
 
     CloseWindow();
     return 0;

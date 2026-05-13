@@ -4,9 +4,6 @@
 #include "raylib.h"
 #include <stdbool.h>
 
-#define LARGURA_TELA 1000
-#define ALTURA_TELA 600
-
 #define TAM_NOME 32
 #define DURACAO_TURNO 90.0f
 #define META_DINHEIRO 150

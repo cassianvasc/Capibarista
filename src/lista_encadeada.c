@@ -16,7 +16,7 @@ void InserirClienteFinal(Cliente **lista, Cliente *novo){
     aux->prox = novo;
 }
 
-void *RemoverClientePrimeiro(Cliente **lista){
+void RemoverClientePrimeiro(Cliente **lista){
     if(*lista == NULL){
         return;
     }

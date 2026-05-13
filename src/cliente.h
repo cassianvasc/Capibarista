@@ -14,7 +14,7 @@ typedef struct Cliente{
     struct Cliente *prox;
 }Cliente;
 
-Cliente criarCliente(int id);
+Cliente *criarCliente(int id);
 
 const char *nomeSaborBolo(SaborBolo sabor); //função para transformar o enum em texto para escrever na dela
 
