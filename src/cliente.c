@@ -8,12 +8,13 @@ const char *nomeSaborBolo(SaborBolo sabor){
 }
 
 Cliente *criarCliente(int id){
-    //aloca o espaço pro cliente novo
+    //alocar o espaço pro cliente novo
     Cliente *novo = malloc(sizeof(Cliente));
     if (novo == NULL) return NULL;
 
-    //preenche os campos do nó
+    //preencher os campos do nó
     novo->id = id;
+
     novo->pedido.cafe = GetRandomValue(0,1); //como os itens sao booleanos, 0 significa que nao esta no pedido e 1 significa que esta
     novo->pedido.tapioca = GetRandomValue(0,1);
     novo->pedido.bolo = GetRandomValue(0,1);
@@ -31,7 +32,8 @@ Cliente *criarCliente(int id){
             novo->pedido.bolo = true;
         }
     }
-
+    
+    //definindo o sabor do bolo
     if(novo->pedido.bolo == true){
         int sabor = GetRandomValue(0,1);
         if(sabor == 0){
@@ -44,11 +46,13 @@ Cliente *criarCliente(int id){
     else {
         novo->pedido.saborBolo = BOLO_NENHUM;
     }
+
     novo->pacienciaAtual = 25.0f;
     novo->pacienciaMaxima = 25.0f;
 
     novo->valorBase = 0;
 
+    //definindo os valores dos itens
     if(novo->pedido.cafe){
         novo->valorBase += 5;
     }
