@@ -11,6 +11,8 @@ typedef struct Jogo{
     float tempoTurno;
     char nomeJogador[TAM_NOME];
     int tamanhoNome;
+    float tempoSpawn;
+    float intervaloSpawn;
 }Jogo;
 
 void inicializarJogo(Jogo *jogo);
@@ -18,5 +20,9 @@ void inicializarJogo(Jogo *jogo);
 void atualizarJogo(Jogo *jogo);
 
 void desenharJogo(Jogo *jogo);
+
+void atualizarPacienciaClientes(Cliente *lista, float dt);
+
+void desenharClientes(Cliente *lista);
 
 #endif

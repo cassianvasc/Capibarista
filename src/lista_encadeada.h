@@ -2,10 +2,10 @@
 #define LISTA_ENCADEADA_H
 #include "cliente.h"
 
-void InserirClienteFinal(Cliente **lista, Cliente *novo);
+void inserirClienteFinal(Cliente **lista, Cliente *novo);
 
-void *RemoverClientePrimeiro(Cliente **lista);
+void *removerClientePrimeiro(Cliente **lista);
 
-void LiberarLista(Cliente **lista);
+void liberarLista(Cliente **lista);
 
 #endif

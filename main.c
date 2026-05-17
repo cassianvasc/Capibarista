@@ -21,7 +21,7 @@ int main(){
         EndDrawing();
     }
 
-    LiberarLista(&jogo.listaClientes);
+    liberarLista(&jogo.listaClientes);
 
     CloseWindow();
     return 0;

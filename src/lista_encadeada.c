@@ -1,7 +1,7 @@
 #include "cliente.h"
 #include <stdlib.h>
 
-void InserirClienteFinal(Cliente **lista, Cliente *novo){
+void inserirClienteFinal(Cliente **lista, Cliente *novo){
     if(novo == NULL){
         return;
     }
@@ -16,7 +16,7 @@ void InserirClienteFinal(Cliente **lista, Cliente *novo){
     aux->prox = novo;
 }
 
-void RemoverClientePrimeiro(Cliente **lista){
+void removerClientePrimeiro(Cliente **lista){
     if(*lista == NULL){
         return;
     }
@@ -25,8 +25,8 @@ void RemoverClientePrimeiro(Cliente **lista){
     free(aux);
 }
 
-void LiberarLista(Cliente **lista){
+void liberarLista(Cliente **lista){
     while(*lista != NULL){
-        RemoverClientePrimeiro(lista);
+        removerClientePrimeiro(lista);
     }
 }
