@@ -15,6 +15,10 @@ typedef struct Jogo{
     int tamanhoNome;
     float tempoSpawn;
     float intervaloSpawn;
+    int qtdTapioca;
+    int qtdBoloGoiabada;
+    int qtdBoloChocolate;
+    int qtdCafe;
 }Jogo;
 
 void inicializarJogo(Jogo *jogo);

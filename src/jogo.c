@@ -18,8 +18,36 @@ void inicializarJogo(Jogo *jogo){
     jogo->tamanhoNome = 0;
     jogo->tempoSpawn = 0;
     jogo->intervaloSpawn = 5.0f;
+    jogo->qtdTapioca = 0;
+    jogo->qtdBoloGoiabada = 0;
+    jogo->qtdBoloChocolate = 0;
+    jogo->qtdCafe = 0;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------
+bool pedidoCompletoNaMao(Jogo *jogo, Cliente *cliente){
+
+    if(cliente->pedido.cafe && jogo->qtdCafe <= 0){
+        return false;
+    }
+
+    if(cliente->pedido.tapioca && jogo->qtdTapioca <= 0){
+        return false;
+    }
+
+    if(cliente->pedido.bolo){
+
+        if(cliente->pedido.saborBolo == BOLO_GOIABADA && jogo->qtdBoloGoiabada <= 0){
+            return false;
+        }
+
+        if(cliente->pedido.saborBolo == BOLO_CHOCOLATE && jogo->qtdBoloChocolate <= 0){
+            return false;
+        }
+    }
+
+    return true;
+}
+//---------------------------------------------------------------------------------------------------------------------------------
 void atualizarJogo(Jogo *jogo){
 
     if(jogo->telaAtual == TELA_NOME){
@@ -53,19 +81,98 @@ void atualizarJogo(Jogo *jogo){
         atualizarPacienciaClientes(jogo->listaClientes, dt);
 
         atualizarCozinha(&jogo->cozinha, dt); 
-    if(jogo->tempoSpawn >= jogo->intervaloSpawn){
 
-        Cliente *novo = criarCliente(jogo->proximoIdCliente);
+        //pegar cafe pronto
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), jogo->cozinha.cafe.areaInteracao)){
+            if(jogo->cozinha.cafe.estado == CAFE_PRONTO){
+                jogo->qtdCafe++;
+                jogo->cozinha.cafe.estado = CAFE_MAQUINA_VAZIA;
+                jogo->cozinha.cafe.tempoPreparo = 0.0f;
+                return;
+            }
+        }
 
-        inserirClienteFinal(&jogo->listaClientes, novo);
+        // Pegar a tapioca pronta
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), jogo->cozinha.fogao.areaInteracao)){
 
-        jogo->proximoIdCliente++;
-        jogo->tempoSpawn = 0;
-    }
-    if(jogo->listaClientes != NULL && jogo->listaClientes->pacienciaAtual <= 0){
-        removerClientePrimeiro(&jogo->listaClientes);
-    }
-    }
+            if(jogo->cozinha.fogao.estado == TAPIOCA_NO_PONTO){
+                jogo->qtdTapioca++;
+                jogo->cozinha.fogao.estado = TAPIOCA_VAZIA;
+                jogo->cozinha.fogao.tempoNoFogo = 0.0f;
+                return;
+            }
+        }
+        // Pegar bolo pronto
+        if(
+            IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
+            CheckCollisionPointRec(GetMousePosition(), jogo->cozinha.forno.areaInteracao)
+        ){
+            if(jogo->cozinha.forno.estado == BOLO_PRONTO){
+
+                if(jogo->cozinha.forno.sabor == BOLO_GOIABADA){
+                    jogo->qtdBoloGoiabada++;
+                }
+                else if(jogo->cozinha.forno.sabor == BOLO_CHOCOLATE){
+                    jogo->qtdBoloChocolate++;
+                }
+
+                jogo->cozinha.forno.estado = FORNO_VAZIO;
+                jogo->cozinha.forno.tempoNoForno = 0.0f;
+                return;
+            }
+        }
+
+        // Entregar item clicando no cliente
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+
+            Vector2 mouse = GetMousePosition();
+            Cliente *cliente = jogo->listaClientes;
+
+            int x = 30;
+            int y = 260;
+
+            while(cliente != NULL){
+                Rectangle areaCliente = {x, y, 160, 130};
+
+                if(CheckCollisionPointRec(mouse, areaCliente)){
+                    if(pedidoCompletoNaMao(jogo, cliente)){
+                        jogo->dinheiro += calcularGorjeta(cliente);
+
+                        if(cliente->pedido.tapioca){
+                            jogo->qtdTapioca--;
+                        }
+                        if(cliente->pedido.bolo){
+                            if(cliente->pedido.saborBolo == BOLO_GOIABADA){
+                                jogo->qtdBoloGoiabada--;
+                            }
+                            else if(cliente->pedido.saborBolo == BOLO_CHOCOLATE){
+                                jogo->qtdBoloChocolate--;
+                            }
+                        }
+                        if(cliente->pedido.cafe){
+                            jogo->qtdCafe--;
+                        }
+                        removerClienteEspecifico(&jogo->listaClientes, cliente);
+                    }
+                    break;
+                }
+                x += 180;
+                cliente = cliente->prox;
+            }
+        }
+        if(jogo->tempoSpawn >= jogo->intervaloSpawn){
+
+            Cliente *novo = criarCliente(jogo->proximoIdCliente);
+
+            inserirClienteFinal(&jogo->listaClientes, novo);
+
+            jogo->proximoIdCliente++;
+            jogo->tempoSpawn = 0;
+        }
+        if(jogo->listaClientes != NULL && jogo->listaClientes->pacienciaAtual <= 0){
+            removerClientePrimeiro(&jogo->listaClientes);
+        }
+        }
 }
 //----------------------------------------------------------------------------------------------------------------------------
 void desenharClientes(Cliente *lista){
@@ -180,6 +287,7 @@ void desenharJogo(Jogo *jogo){
     DrawText(instrucao, largura / 2 - larguraInstrucao / 2, altura / 2 + 50, 22, DARKBROWN);
     }
 
+
     else if(jogo->telaAtual == TELA_JOGO){
 
     int largura = GetScreenWidth();
@@ -207,5 +315,19 @@ void desenharJogo(Jogo *jogo){
     DrawText("Cozinha", 30, 420, 28, MAROON);
 
     desenharCozinha(&jogo->cozinha);
+
+   char textoInventario[80];
+
+    sprintf(textoInventario, "Tapiocas: %d", jogo->qtdTapioca);
+    DrawText(textoInventario, largura - 220, 90, 22, DARKBROWN);
+
+    sprintf(textoInventario, "Bolo goiabada: %d", jogo->qtdBoloGoiabada);
+    DrawText(textoInventario, largura - 220, 120, 22, DARKBROWN);
+
+    sprintf(textoInventario, "Bolo chocolate: %d", jogo->qtdBoloChocolate);
+    DrawText(textoInventario, largura - 220, 150, 22, DARKBROWN);
+
+    sprintf(textoInventario, "Cafe: %d", jogo->qtdCafe);
+    DrawText(textoInventario, largura - 220, 60, 22, DARKBROWN);
  }
 }
