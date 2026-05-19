@@ -48,8 +48,8 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
         }
         else if (cozinha->forno.estado == BOLO_PRONTO)
         {
-            // Jogador pega o bolo pronto!
-            cozinha->forno.estado = FORNO_VAZIO;
+            // nao faz nada aqui
+            // quem pega o bolo pronto sera o jogo.c
         }
         else if (cozinha->forno.estado == BOLO_QUEIMADO)
         {
@@ -88,8 +88,8 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
         }
         else if (cozinha->fogao.estado == TAPIOCA_NO_PONTO)
         {
-            
-            cozinha->fogao.estado = TAPIOCA_VAZIA;
+            // nao faz nada aqui
+            // quem pega a tapioca pronta sera o jogo.c
         }
         else if (cozinha->fogao.estado == TAPIOCA_QUEIMADA)
         {

@@ -2,7 +2,6 @@
 #define COMUM_H
 
 #include "raylib.h"
-#include "cozinha.h"
 #include <stdbool.h>
 
 #define TAM_NOME 32

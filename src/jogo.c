@@ -18,8 +18,29 @@ void inicializarJogo(Jogo *jogo){
     jogo->tamanhoNome = 0;
     jogo->tempoSpawn = 0;
     jogo->intervaloSpawn = 5.0f;
+    jogo->segurandoCafe = false;
+    jogo->segurandoTapioca = false;
+    jogo->segurandoBolo = false;
+    jogo->saborBoloMao = BOLO_NENHUM;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------
+bool pedidoCompletoNaMao(Jogo *jogo, Cliente *cliente){
+
+    if(cliente->pedido.cafe && !jogo->segurandoCafe){
+        return false;
+    }
+    if(cliente->pedido.tapioca && !jogo->segurandoTapioca){
+        return false;
+    }
+    if(cliente->pedido.bolo && !jogo->segurandoBolo){
+        return false;
+    }
+    if(cliente->pedido.bolo && cliente->pedido.saborBolo != jogo->saborBoloMao){
+        return false;
+    }
+    return true;
+}
+//---------------------------------------------------------------------------------------------------------------------------------
 void atualizarJogo(Jogo *jogo){
 
     if(jogo->telaAtual == TELA_NOME){
@@ -53,19 +74,65 @@ void atualizarJogo(Jogo *jogo){
         atualizarPacienciaClientes(jogo->listaClientes, dt);
 
         atualizarCozinha(&jogo->cozinha, dt); 
-    if(jogo->tempoSpawn >= jogo->intervaloSpawn){
+        // Pegar a tapioca pronta
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), jogo->cozinha.fogao.areaInteracao)){
+            if(
+                jogo->cozinha.fogao.estado == TAPIOCA_NO_PONTO &&
+                jogo->segurandoTapioca == false
+            ){
+                jogo->segurandoTapioca = true;
+                jogo->cozinha.fogao.estado = TAPIOCA_VAZIA;
+                jogo->cozinha.fogao.tempoNoFogo = 0.0f;
+            }
+        }
 
-        Cliente *novo = criarCliente(jogo->proximoIdCliente);
+        // Entregar item clicando no cliente
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
 
-        inserirClienteFinal(&jogo->listaClientes, novo);
+            Vector2 mouse = GetMousePosition();
+            Cliente *cliente = jogo->listaClientes;
 
-        jogo->proximoIdCliente++;
-        jogo->tempoSpawn = 0;
-    }
-    if(jogo->listaClientes != NULL && jogo->listaClientes->pacienciaAtual <= 0){
-        removerClientePrimeiro(&jogo->listaClientes);
-    }
-    }
+            int x = 30;
+            int y = 260;
+
+            while(cliente != NULL){
+                Rectangle areaCliente = {x, y, 160, 130};
+
+                if(CheckCollisionPointRec(mouse, areaCliente)){
+                    if(pedidoCompletoNaMao(jogo, cliente)){
+                        jogo->dinheiro += calcularGorjeta(cliente);
+
+                        if(cliente->pedido.cafe){
+                            jogo->segurandoCafe = false;
+                        }
+                        if(cliente->pedido.tapioca){
+                            jogo->segurandoTapioca = false;
+                        }
+                        if(cliente->pedido.bolo){
+                            jogo->segurandoBolo = false;
+                            jogo->saborBoloMao = BOLO_NENHUM;
+                        }
+                        removerClientePrimeiro(&jogo->listaClientes);
+                    }
+                    break;
+                }
+                x += 180;
+                cliente = cliente->prox;
+            }
+        }
+        if(jogo->tempoSpawn >= jogo->intervaloSpawn){
+
+            Cliente *novo = criarCliente(jogo->proximoIdCliente);
+
+            inserirClienteFinal(&jogo->listaClientes, novo);
+
+            jogo->proximoIdCliente++;
+            jogo->tempoSpawn = 0;
+        }
+        if(jogo->listaClientes != NULL && jogo->listaClientes->pacienciaAtual <= 0){
+            removerClientePrimeiro(&jogo->listaClientes);
+        }
+        }
 }
 //----------------------------------------------------------------------------------------------------------------------------
 void desenharClientes(Cliente *lista){
@@ -207,5 +274,18 @@ void desenharJogo(Jogo *jogo){
     DrawText("Cozinha", 30, 420, 28, MAROON);
 
     desenharCozinha(&jogo->cozinha);
+
+    // Mostrar item na mao do jogador
+    if(jogo->segurandoTapioca){
+
+        DrawRectangle(largura - 220, 90, 180, 50, YELLOW);
+        DrawText(
+            "Tapioca",
+            largura - 180,
+            105,
+            24,
+            BLACK
+        );
+    }
  }
 }
