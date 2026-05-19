@@ -36,6 +36,12 @@ typedef enum EstadoForno {
     BOLO_QUEIMADO     
 } EstadoForno;
 
+typedef enum EstadoCafe{
+    CAFE_MAQUINA_VAZIA,
+    CAFE_PREPARANDO,
+    CAFE_PRONTO
+} EstadoCafe;
+
 typedef struct Pedido{ 
     bool cafe;
     bool tapioca;

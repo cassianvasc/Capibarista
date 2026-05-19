@@ -18,11 +18,17 @@ typedef struct EstacaoBolo {
     float tempoNoForno;
 } EstacaoBolo;
 
+typedef struct EstacaoCafe{
+    Rectangle areaInteracao;
+    EstadoCafe estado;
+    float tempoPreparo;
+} EstacaoCafe;
+
 // --- ESTRUTURA GERAL DA COZINHA ---
 typedef struct Cozinha {
     EstacaoTapioca fogao;
     EstacaoBolo forno;
-    
+    EstacaoCafe cafe;
 } Cozinha;
 
 

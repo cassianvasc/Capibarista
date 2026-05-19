@@ -82,6 +82,16 @@ void atualizarJogo(Jogo *jogo){
 
         atualizarCozinha(&jogo->cozinha, dt); 
 
+        //pegar cafe pronto
+        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), jogo->cozinha.cafe.areaInteracao)){
+            if(jogo->cozinha.cafe.estado == CAFE_PRONTO){
+                jogo->qtdCafe++;
+                jogo->cozinha.cafe.estado = CAFE_MAQUINA_VAZIA;
+                jogo->cozinha.cafe.tempoPreparo = 0.0f;
+                return;
+            }
+        }
+
         // Pegar a tapioca pronta
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), jogo->cozinha.fogao.areaInteracao)){
 
@@ -316,7 +326,7 @@ void desenharJogo(Jogo *jogo){
 
     sprintf(textoInventario, "Bolo chocolate: %d", jogo->qtdBoloChocolate);
     DrawText(textoInventario, largura - 220, 150, 22, DARKBROWN);
-    
+
     sprintf(textoInventario, "Cafe: %d", jogo->qtdCafe);
     DrawText(textoInventario, largura - 220, 60, 22, DARKBROWN);
  }
