@@ -9,7 +9,6 @@ typedef struct Cliente{
 
     float pacienciaMaxima;
     float pacienciaAtual;
-    float valorBase; //pagamento sem a gorjeta
 
     struct Cliente *prox;
 }Cliente;
@@ -17,5 +16,7 @@ typedef struct Cliente{
 Cliente *criarCliente(int id);
 
 const char *nomeSaborBolo(SaborBolo sabor); //função para transformar o enum em texto para escrever na dela
+
+int calcularGorjeta(Cliente *cliente);
 
 #endif

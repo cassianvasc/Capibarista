@@ -50,19 +50,15 @@ Cliente *criarCliente(int id){
     novo->pacienciaAtual = 25.0f;
     novo->pacienciaMaxima = 25.0f;
 
-    novo->valorBase = 0;
-
-    //definindo os valores dos itens
-    if(novo->pedido.cafe){
-        novo->valorBase += 5;
-    }
-    if(novo->pedido.tapioca){
-        novo->valorBase += 15;
-    }
-    if(novo->pedido.bolo){
-        novo->valorBase += 10;
-    }
-
     novo->prox = NULL;
     return novo;
+}
+
+
+int calcularGorjeta(Cliente *cliente){
+    float porcentagemPaciencia;
+    
+    porcentagemPaciencia = cliente->pacienciaAtual / cliente->pacienciaMaxima;
+    
+    return 20 * porcentagemPaciencia;
 }

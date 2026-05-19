@@ -4,7 +4,7 @@
 
 void inserirClienteFinal(Cliente **lista, Cliente *novo);
 
-void *removerClientePrimeiro(Cliente **lista);
+void removerClientePrimeiro(Cliente **lista);
 
 void liberarLista(Cliente **lista);
 
