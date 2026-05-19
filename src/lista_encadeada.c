@@ -25,6 +25,30 @@ void removerClientePrimeiro(Cliente **lista){
     free(aux);
 }
 
+void removerClienteEspecifico(Cliente **lista, Cliente *clienteRemover){
+
+    if(*lista == NULL || clienteRemover == NULL){
+        return;
+    }
+    if(*lista == clienteRemover){
+        Cliente *aux = *lista;
+        *lista = (*lista)->prox;
+        free(aux);
+        return;
+    }
+    Cliente *anterior = *lista;
+    while(
+        anterior->prox != NULL &&
+        anterior->prox != clienteRemover
+    ){
+        anterior = anterior->prox;
+    }
+    if(anterior->prox == clienteRemover){
+        anterior->prox = clienteRemover->prox;
+        free(clienteRemover);
+    }
+}
+
 void liberarLista(Cliente **lista){
     while(*lista != NULL){
         removerClientePrimeiro(lista);

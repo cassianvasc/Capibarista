@@ -112,7 +112,7 @@ void atualizarJogo(Jogo *jogo){
                             jogo->segurandoBolo = false;
                             jogo->saborBoloMao = BOLO_NENHUM;
                         }
-                        removerClientePrimeiro(&jogo->listaClientes);
+                        removerClienteEspecifico(&jogo->listaClientes, cliente);
                     }
                     break;
                 }
