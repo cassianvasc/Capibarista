@@ -2,10 +2,12 @@
 #define JOGO_H
 #include "global.h"
 #include "cliente.h"
+#include "cozinha.h"
 
 typedef struct Jogo{
     TelaJogo telaAtual;
     Cliente *listaClientes;
+    Cozinha cozinha;
     int proximoIdCliente;
     int dinheiro;
     float tempoTurno;
@@ -24,5 +26,7 @@ void desenharJogo(Jogo *jogo);
 void atualizarPacienciaClientes(Cliente *lista, float dt);
 
 void desenharClientes(Cliente *lista);
+
+
 
 #endif

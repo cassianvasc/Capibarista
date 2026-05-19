@@ -2,6 +2,7 @@
 #define COMUM_H
 
 #include "raylib.h"
+#include "cozinha.h"
 #include <stdbool.h>
 
 #define TAM_NOME 32
@@ -16,11 +17,7 @@ typedef enum TelaJogo{
     TELA_FIM
 } TelaJogo;
 
-typedef enum SaborBolo{
-    BOLO_NENHUM,
-    BOLO_GOIABADA,
-    BOLO_CHOCOLATE
-} SaborBolo;
+
 
 typedef struct Pedido{ 
     bool cafe;
@@ -28,5 +25,6 @@ typedef struct Pedido{
     bool bolo;
     SaborBolo saborBolo;
 } Pedido;
+
 
 #endif

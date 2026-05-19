@@ -4,11 +4,13 @@
 #include "jogo.h"
 #include "lista_encadeada.h"
 #include "menu.h"
+#include "cozinha.h"
 #include <stdio.h>
 
 void inicializarJogo(Jogo *jogo){
     jogo->telaAtual = TELA_MENU;
     jogo->listaClientes = NULL;
+    inicializarCozinha(&jogo->cozinha);
     jogo->proximoIdCliente = 1;
     jogo->dinheiro = 0;
     jogo->tempoTurno = DURACAO_TURNO;
@@ -49,6 +51,8 @@ void atualizarJogo(Jogo *jogo){
         }
         jogo->tempoSpawn += dt;
         atualizarPacienciaClientes(jogo->listaClientes, dt);
+
+        atualizarCozinha(&jogo->cozinha, dt); 
     if(jogo->tempoSpawn >= jogo->intervaloSpawn){
 
         Cliente *novo = criarCliente(jogo->proximoIdCliente);
@@ -201,5 +205,7 @@ void desenharJogo(Jogo *jogo){
     DrawText("Fila de clientes", 30, 220, 28, MAROON);
     desenharClientes(jogo->listaClientes);
     DrawText("Cozinha", 30, 420, 28, MAROON);
+
+    desenharCozinha(&jogo->cozinha);
  }
 }
