@@ -41,10 +41,17 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
     if (clicou && CheckCollisionPointRec(mouse, cozinha->forno.areaInteracao))
     {
         if (cozinha->forno.estado == FORNO_VAZIO)
-        {
+{
             cozinha->forno.estado = BOLO_ASSANDO;
             cozinha->forno.tempoNoForno = 0.0f;
-            cozinha->forno.sabor = BOLO_CHOCOLATE; // Padrão temporário
+
+            // goiabada sera o sabor padrao
+            cozinha->forno.sabor = BOLO_GOIABADA;
+
+            // segurando C muda para chocolate
+            if(IsKeyDown(KEY_C)){
+                cozinha->forno.sabor = BOLO_CHOCOLATE;
+            }
         }
         else if (cozinha->forno.estado == BOLO_PRONTO)
         {
