@@ -2,15 +2,7 @@
 #define COZINHA_H
 
 #include "raylib.h"
-
-
-// --- ESTAÇÃO DA TAPIOCA ---
-typedef enum EstadoTapioca {
-    TAPIOCA_VAZIA,
-    TAPIOCA_CRUA,
-    TAPIOCA_NO_PONTO,
-    TAPIOCA_QUEIMADA
-} EstadoTapioca;
+#include "global.h"
 
 typedef struct EstacaoTapioca {
     Rectangle areaInteracao;
@@ -18,19 +10,6 @@ typedef struct EstacaoTapioca {
     float tempoNoFogo;
 } EstacaoTapioca;
 
-// --- ESTAÇÃO DO BOLO (FORNO) ---
-typedef enum EstadoForno {
-    FORNO_VAZIO,
-    BOLO_ASSANDO,      
-    BOLO_PRONTO,     
-    BOLO_QUEIMADO     
-} EstadoForno;
-
-typedef enum SaborBolo{
-    BOLO_NENHUM,
-    BOLO_GOIABADA,
-    BOLO_CHOCOLATE
-} SaborBolo;
 
 typedef struct EstacaoBolo {
     Rectangle areaInteracao;
