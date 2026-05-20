@@ -7,7 +7,6 @@ int main(){
     const int LARGURA_TELA = 1280;
     const int ALTURA_TELA = 720;
     
-
     InitWindow(LARGURA_TELA, ALTURA_TELA, "Capibarista");
 
     SetTargetFPS(60);

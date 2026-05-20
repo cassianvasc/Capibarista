@@ -49,6 +49,30 @@ void removerClienteEspecifico(Cliente **lista, Cliente *clienteRemover){
     }
 }
 
+void removerClientesSemPaciencia(Cliente **lista){
+    if(*lista == NULL){
+        return;
+    }
+    //caso a remoçao seja no head
+    while(*lista != NULL && (*lista)->pacienciaAtual <= 0){
+        Cliente *remover = *lista;
+        *lista = (*lista)->prox;
+        free(remover);
+    }
+    //caso a remoçao seja no meio ou tail
+    Cliente *atual = *lista;
+    while(atual->prox != NULL){
+        if(atual->prox->pacienciaAtual <= 0){
+            Cliente *remover = atual->prox;
+            atual->prox = remover->prox;
+            free(remover);
+        }
+        else{
+            atual = atual->prox;
+        }
+    }
+}
+
 void liberarLista(Cliente **lista){
     while(*lista != NULL){
         removerClientePrimeiro(lista);

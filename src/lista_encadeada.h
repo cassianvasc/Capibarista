@@ -8,6 +8,8 @@ void removerClientePrimeiro(Cliente **lista);
 
 void removerClienteEspecifico(Cliente **lista, Cliente *clienteRemover);
 
+void removerClientesSemPaciencia(Cliente **lista);
+
 void liberarLista(Cliente **lista);
 
 #endif

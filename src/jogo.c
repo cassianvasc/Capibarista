@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "global.h"
 #include "jogo.h"
 #include "lista_encadeada.h"
 #include "menu.h"
 #include "cozinha.h"
-#include <stdio.h>
+#include "ranking.h"
 
 void inicializarJogo(Jogo *jogo){
     jogo->telaAtual = TELA_MENU;
@@ -29,22 +30,17 @@ bool pedidoCompletoNaMao(Jogo *jogo, Cliente *cliente){
     if(cliente->pedido.cafe && jogo->qtdCafe <= 0){
         return false;
     }
-
     if(cliente->pedido.tapioca && jogo->qtdTapioca <= 0){
         return false;
     }
-
     if(cliente->pedido.bolo){
-
         if(cliente->pedido.saborBolo == BOLO_GOIABADA && jogo->qtdBoloGoiabada <= 0){
             return false;
         }
-
         if(cliente->pedido.saborBolo == BOLO_CHOCOLATE && jogo->qtdBoloChocolate <= 0){
             return false;
         }
     }
-
     return true;
 }
 //---------------------------------------------------------------------------------------------------------------------------------
@@ -68,14 +64,15 @@ void atualizarJogo(Jogo *jogo){
             jogo->telaAtual = TELA_JOGO;
         }
     }
-
-
+//=============================================================================
     else if(jogo->telaAtual == TELA_JOGO){
         float dt = GetFrameTime();
 
         jogo->tempoTurno -= dt;
+
         if(jogo->tempoTurno <= 0){
             jogo->tempoTurno = 0;
+            salvarPontuacao(jogo->nomeJogador, jogo->dinheiro);
             jogo->telaAtual = TELA_FIM;
         }
         jogo->tempoSpawn += dt;
@@ -170,15 +167,18 @@ void atualizarJogo(Jogo *jogo){
             jogo->proximoIdCliente++;
             jogo->tempoSpawn = 0;
         }
-        if(jogo->listaClientes != NULL && jogo->listaClientes->pacienciaAtual <= 0){
-            removerClientePrimeiro(&jogo->listaClientes);
-        }
+        removerClientesSemPaciencia(&jogo->listaClientes);
     }
-
-
+//=============================================================================
     else if(jogo->telaAtual == TELA_FIM){
         if(IsKeyPressed(KEY_ENTER)){
             inicializarJogo(jogo);
+        }
+    }
+//=============================================================================
+    else if(jogo->telaAtual == TELA_RANKING){
+        if(IsKeyPressed(KEY_ENTER)){
+            jogo->telaAtual = TELA_MENU;
         }
     }
 }
@@ -234,6 +234,7 @@ void atualizarPacienciaClientes(Cliente *lista, float dt){
 }
 //------------------------------------------------------------------------------------------------------------------------------
 void desenharJogo(Jogo *jogo){
+
     if(jogo->telaAtual == TELA_MENU){
 
         int largura = GetScreenWidth();
@@ -269,7 +270,7 @@ void desenharJogo(Jogo *jogo){
             jogo->telaAtual = TELA_RANKING;
         }
     }
-
+//======================================================================================
     else if(jogo->telaAtual == TELA_NOME){
 
         int largura = GetScreenWidth();
@@ -295,7 +296,7 @@ void desenharJogo(Jogo *jogo){
         DrawText(instrucao, largura / 2 - larguraInstrucao / 2, altura / 2 + 50, 22, DARKBROWN);
     }
 
-
+//======================================================================================
     else if(jogo->telaAtual == TELA_JOGO){
 
         int largura = GetScreenWidth();
@@ -339,6 +340,7 @@ void desenharJogo(Jogo *jogo){
         DrawText(textoInventario, largura - 220, 60, 22, DARKBROWN);
     }
 
+//======================================================================================
     else if(jogo->telaAtual == TELA_FIM){
 
         int largura = GetScreenWidth();
@@ -388,4 +390,48 @@ void desenharJogo(Jogo *jogo){
             DARKBROWN
         );
     }
+
+//======================================================================================
+    else if(jogo->telaAtual == TELA_RANKING){
+        int largura = GetScreenWidth();
+        DrawText(
+            "RANKING",
+            largura/2 - 100,
+            50,
+            50,
+            DARKBROWN
+        );
+        JogadorRanking ranking[MAX_RANKING];
+        int quantidade = carregarRanking(ranking);
+
+        ordenarRanking(ranking, quantidade);
+
+        int y = 140;
+
+        for(int i = 0; i < quantidade && i < 10; i++){
+            char texto[100];
+            sprintf(
+                texto,
+                "%d. %s - R$ %d",
+                i + 1,
+                ranking[i].nome,
+                ranking[i].pontuacao
+            );
+            DrawText(
+                texto,
+                largura/2 - 180,
+                y,
+                28,
+                MAROON
+            );
+            y += 40;
+        }
+        DrawText(
+            "Pressione ENTER para voltar ao menu",
+            largura/2 - 170,
+            y + 40,
+            24,
+            DARKBROWN
+        );
+        }
 }
