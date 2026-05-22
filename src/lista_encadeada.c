@@ -1,5 +1,6 @@
 #include "cliente.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void inserirClienteFinal(Cliente **lista, Cliente *novo){
     if(novo == NULL){
@@ -49,13 +50,19 @@ void removerClienteEspecifico(Cliente **lista, Cliente *clienteRemover){
     }
 }
 
-void removerClientesSemPaciencia(Cliente **lista){
+void removerClientesSemPaciencia(Cliente **lista, int *dinheiro, char aviso[], float *tempoAviso){
     if(*lista == NULL){
         return;
     }
     //caso a remoçao seja no head
     while(*lista != NULL && (*lista)->pacienciaAtual <= 0){
         Cliente *remover = *lista;
+
+        *dinheiro -= 15;
+
+        sprintf(aviso, "Cliente foi embora! -R$ 15");
+        *tempoAviso = 2.0f;
+
         *lista = (*lista)->prox;
         free(remover);
     }
@@ -64,6 +71,12 @@ void removerClientesSemPaciencia(Cliente **lista){
     while(atual->prox != NULL){
         if(atual->prox->pacienciaAtual <= 0){
             Cliente *remover = atual->prox;
+
+            *dinheiro -= 15;
+
+            sprintf(aviso, "Cliente foi embora! -R$ 15");
+            *tempoAviso = 2.0f;
+
             atual->prox = remover->prox;
             free(remover);
         }

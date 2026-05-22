@@ -188,7 +188,7 @@ void atualizarJogo(Jogo *jogo){
             jogo->proximoIdCliente++;
             jogo->tempoSpawn = 0;
         }
-        removerClientesSemPaciencia(&jogo->listaClientes);
+        removerClientesSemPaciencia(&jogo->listaClientes, &jogo->dinheiro, jogo->aviso, &jogo->tempoAviso);
     }
 //=============================================================================
     else if(jogo->telaAtual == TELA_FIM){
@@ -346,7 +346,7 @@ void desenharJogo(Jogo *jogo){
 
         desenharCozinha(&jogo->cozinha);
 
-    char textoInventario[80];
+        char textoInventario[80];
 
         sprintf(textoInventario, "Tapiocas: %d", jogo->qtdTapioca);
         DrawText(textoInventario, largura - 220, 90, 22, DARKBROWN);
@@ -359,6 +359,25 @@ void desenharJogo(Jogo *jogo){
 
         sprintf(textoInventario, "Cafe: %d", jogo->qtdCafe);
         DrawText(textoInventario, largura - 220, 60, 22, DARKBROWN);
+
+        if(jogo->tempoAviso > 0){
+            int larguraTexto = MeasureText(jogo->aviso, 28);
+
+            DrawRectangle(
+                GetScreenWidth()/2 - larguraTexto/2 - 20,
+                20,
+                larguraTexto + 40,
+                50,
+                Fade(BLACK, 0.7f)
+            );
+            DrawText(
+                jogo->aviso,
+                GetScreenWidth()/2 - larguraTexto/2,
+                32,
+                28,
+                RED
+            );
+        }
     }
 
 //======================================================================================

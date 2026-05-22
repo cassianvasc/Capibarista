@@ -8,7 +8,7 @@ void removerClientePrimeiro(Cliente **lista);
 
 void removerClienteEspecifico(Cliente **lista, Cliente *clienteRemover);
 
-void removerClientesSemPaciencia(Cliente **lista);
+void removerClientesSemPaciencia(Cliente **lista, int *dinheiro, char aviso[], float *tempoAviso);
 
 void liberarLista(Cliente **lista);
 
