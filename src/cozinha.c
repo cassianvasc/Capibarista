@@ -16,6 +16,9 @@ void inicializarCozinha(Cozinha *cozinha)
     cozinha->cafe.estado = CAFE_MAQUINA_VAZIA;
     cozinha->cafe.tempoPreparo = 0.0f;
     cozinha->cafe.areaInteracao = (Rectangle){400, 400, 100, 100};
+
+    cozinha->fogao.penalidadeAplicada = false;
+    cozinha->forno.penalidadeAplicada = false;
 }
 
 void atualizarCozinha(Cozinha *cozinha, float dt)
@@ -56,6 +59,7 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
         else if (cozinha->forno.estado == BOLO_PRONTO && cozinha->forno.tempoNoForno >= 9.0f)
         {
             cozinha->forno.estado = BOLO_QUEIMADO;
+
         }
     }
 
@@ -66,6 +70,7 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
 {
             cozinha->forno.estado = BOLO_ASSANDO;
             cozinha->forno.tempoNoForno = 0.0f;
+            cozinha->forno.penalidadeAplicada = false;
 
             // goiabada sera o sabor padrao
             cozinha->forno.sabor = BOLO_GOIABADA;
@@ -84,6 +89,9 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
         {
             // Jogador limpa o forno (joga no lixo)
             cozinha->forno.estado = FORNO_VAZIO;
+            cozinha->forno.tempoNoForno = 0.0f;
+            cozinha->forno.penalidadeAplicada = false;
+
         }
     }
 
@@ -103,6 +111,7 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
         else if (cozinha->fogao.estado == TAPIOCA_NO_PONTO && cozinha->fogao.tempoNoFogo >= 5.0f)
         {
             cozinha->fogao.estado = TAPIOCA_QUEIMADA;
+
         }
     }
 
@@ -113,6 +122,7 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
         {
             cozinha->fogao.estado = TAPIOCA_CRUA;
             cozinha->fogao.tempoNoFogo = 0.0f;
+            cozinha->fogao.penalidadeAplicada = false;
             
         }
         else if (cozinha->fogao.estado == TAPIOCA_NO_PONTO)
@@ -124,6 +134,8 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
         {
             
             cozinha->fogao.estado = TAPIOCA_VAZIA;
+            cozinha->fogao.tempoNoFogo = 0.0f;
+            cozinha->fogao.penalidadeAplicada = false;
         }
     }
 }

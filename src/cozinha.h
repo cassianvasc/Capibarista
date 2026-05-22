@@ -8,6 +8,7 @@ typedef struct EstacaoTapioca {
     Rectangle areaInteracao;
     EstadoTapioca estado;
     float tempoNoFogo;
+    bool penalidadeAplicada;
 } EstacaoTapioca;
 
 
@@ -16,6 +17,7 @@ typedef struct EstacaoBolo {
     EstadoForno estado;
     SaborBolo sabor;   
     float tempoNoForno;
+    bool penalidadeAplicada;
 } EstacaoBolo;
 
 typedef struct EstacaoCafe{

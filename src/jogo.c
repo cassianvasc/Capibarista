@@ -23,6 +23,8 @@ void inicializarJogo(Jogo *jogo){
     jogo->qtdBoloGoiabada = 0;
     jogo->qtdBoloChocolate = 0;
     jogo->qtdCafe = 0;
+    jogo->aviso[0] = '\0';
+    jogo->tempoAviso = 0.0f;
 }
 //-------------------------------------------------------------------------------------------------------------------------------------
 bool pedidoCompletoNaMao(Jogo *jogo, Cliente *cliente){
@@ -67,6 +69,9 @@ void atualizarJogo(Jogo *jogo){
 //=============================================================================
     else if(jogo->telaAtual == TELA_JOGO){
         float dt = GetFrameTime();
+        if(jogo->tempoAviso > 0){
+            jogo->tempoAviso -= dt;
+        }
 
         jogo->tempoTurno -= dt;
 
@@ -78,7 +83,23 @@ void atualizarJogo(Jogo *jogo){
         jogo->tempoSpawn += dt;
         atualizarPacienciaClientes(jogo->listaClientes, dt);
 
-        atualizarCozinha(&jogo->cozinha, dt); 
+        atualizarCozinha(&jogo->cozinha, dt);
+
+        // Penalidade por tapioca queimada
+        if(jogo->cozinha.fogao.estado == TAPIOCA_QUEIMADA && !jogo->cozinha.fogao.penalidadeAplicada){
+            jogo->dinheiro -= 5;
+            sprintf(jogo->aviso, "Tapioca queimou! -R$ 5");
+            jogo->tempoAviso = 2.0f;
+            jogo->cozinha.fogao.penalidadeAplicada = true;
+        }
+
+        // Penalidade por bolo queimado
+        if(jogo->cozinha.forno.estado == BOLO_QUEIMADO && !jogo->cozinha.forno.penalidadeAplicada){
+            jogo->dinheiro -= 10;
+            sprintf(jogo->aviso, "Bolo queimou! -R$ 10");
+            jogo->tempoAviso = 2.0f;
+            jogo->cozinha.forno.penalidadeAplicada = true;
+        }
 
         //pegar cafe pronto
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), jogo->cozinha.cafe.areaInteracao)){

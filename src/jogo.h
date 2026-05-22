@@ -19,6 +19,8 @@ typedef struct Jogo{
     int qtdBoloGoiabada;
     int qtdBoloChocolate;
     int qtdCafe;
+    char aviso[100];
+    float tempoAviso;
 }Jogo;
 
 void inicializarJogo(Jogo *jogo);
