@@ -21,6 +21,14 @@ typedef struct Jogo{
     int qtdCafe;
     char aviso[100];
     float tempoAviso;
+    Texture2D texturaMenu;
+    Texture2D texturaFundoJogo;
+    Texture2D btnNormalJogar;
+    Texture2D btnHoverJogar;
+    Texture2D btnNormalRanking;
+    Texture2D btnHoverRanking;
+    Texture2D btnNormalCreditos;
+    Texture2D btnHoverCreditos;
 }Jogo;
 
 void inicializarJogo(Jogo *jogo);

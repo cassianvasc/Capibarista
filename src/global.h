@@ -13,7 +13,8 @@ typedef enum TelaJogo{
     TELA_NOME,
     TELA_JOGO,
     TELA_RANKING,
-    TELA_FIM
+    TELA_FIM,
+    TELA_CREDITOS
 } TelaJogo;
 
 typedef enum SaborBolo{

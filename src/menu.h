@@ -3,6 +3,6 @@
 
 #include "global.h"
 
-int botaoClicado(Rectangle botao, const char *texto);
+int botaoImagemClicado(Vector2 posicao, Texture2D texturaNormal, Texture2D texturaHover);
 
 #endif

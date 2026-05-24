@@ -1,29 +1,15 @@
 #include "menu.h"
 
-int botaoClicado(Rectangle botao, const char *texto){
+int botaoImagemClicado(Vector2 posicao, Texture2D texturaNormal, Texture2D texturaHover){
     Vector2 mouse = GetMousePosition();
+    
+    Rectangle areaColisao = { posicao.x, posicao.y, texturaNormal.width, texturaNormal.height };
+    
+    int mouseEmCima = CheckCollisionPointRec(mouse, areaColisao);
 
-    int mouseEmCima = CheckCollisionPointRec(mouse, botao);
+    Texture2D texturaAtual = mouseEmCima ? texturaHover : texturaNormal;
 
-    if(mouseEmCima){
-        DrawRectangleRec(botao, ORANGE);
-    }
-    else{
-        DrawRectangleRec(botao, GOLD);
-    }
-
-    DrawRectangleLinesEx(botao, 3, BROWN);
-
-    int tamanhoFonte = 28;
-    int larguraTexto = MeasureText(texto, tamanhoFonte);
-
-    DrawText(
-        texto,
-        botao.x + botao.width / 2 - larguraTexto / 2,
-        botao.y + botao.height / 2 - tamanhoFonte / 2,
-        tamanhoFonte,
-        DARKBROWN
-    );
+    DrawTexture(texturaAtual, posicao.x, posicao.y, WHITE);
 
     if(mouseEmCima && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
         return 1;
