@@ -4,3 +4,5 @@ natacha -7
 cassteste 238
 teste2 24
 d -180
+a 22
+cass 10

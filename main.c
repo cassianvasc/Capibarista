@@ -25,6 +25,11 @@ int main(){
     jogo.clienteCaboclo = LoadTexture("assets/caboclo.png");
     jogo.clienteChico = LoadTexture("assets/chico.png");
     jogo.clienteNatacha = LoadTexture("assets/natacha.png");
+    jogo.frigideiraVazia = LoadTexture("assets/frigideiravazia.png");
+    jogo.frigideiraCrua = LoadTexture("assets/frigideiracrua.png");
+    jogo.frigideiraBoa = LoadTexture("assets/frigideiraboa.png");
+    jogo.frigideiraQueimada = LoadTexture("assets/frigideiraqueimada.png");
+
 
 // ==========================================================================================================================
 // Menu - Carregamento das texturas dos botões
@@ -65,6 +70,10 @@ int main(){
     UnloadTexture(jogo.clienteCaboclo);
     UnloadTexture(jogo.clienteChico);
     UnloadTexture(jogo.clienteNatacha);
+    UnloadTexture(jogo.frigideiraVazia);
+    UnloadTexture(jogo.frigideiraCrua);
+    UnloadTexture(jogo.frigideiraBoa);
+    UnloadTexture(jogo.frigideiraQueimada);
 
 
     CloseWindow();

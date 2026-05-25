@@ -166,19 +166,23 @@ void atualizarJogo(Jogo *jogo)
             }
         }
 
-        // Entregar item clicando no cliente
+       // Entregar item clicando no cliente
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
-
             Vector2 mouse = GetMousePosition();
             Cliente *cliente = jogo->listaClientes;
 
-            int x = 30;
-            int y = 260;
+            int x = 190;
+            int y = 55;
 
             while (cliente != NULL)
             {
-                Rectangle areaCliente = {x, y, 160, 130};
+                Rectangle areaCliente = {
+                    x,
+                    y,
+                    190,
+                    300
+                };
 
                 if (CheckCollisionPointRec(mouse, areaCliente))
                 {
@@ -190,17 +194,19 @@ void atualizarJogo(Jogo *jogo)
                         {
                             jogo->qtdTapioca--;
                         }
+
                         if (cliente->pedido.bolo)
                         {
                             if (cliente->pedido.saborBolo == BOLO_GOIABADA)
                             {
                                 jogo->qtdBoloGoiabada--;
                             }
-                            else if (cliente->pedido.saborBolo == BOLO_CHOCOLATE)
+                            else
                             {
                                 jogo->qtdBoloChocolate--;
                             }
                         }
+
                         if (cliente->pedido.cafe)
                         {
                             jogo->qtdCafe--;
@@ -209,7 +215,8 @@ void atualizarJogo(Jogo *jogo)
                     }
                     break;
                 }
-                x += 180;
+
+                x += 230;
                 cliente = cliente->prox;
             }
         }
@@ -499,62 +506,197 @@ void desenharJogo(Jogo *jogo)
         //======================================================================================
         else if (jogo->telaAtual == TELA_JOGO)
         {
-
             int largura = GetScreenWidth();
 
+            char textoInventario[80];
             DrawTexture(jogo->texturaFundoJogo, 0, 0, WHITE);
 
-            // DrawText("Capibarista", 30, 25, 32, DARKBROWN);
+            //========================
+            // HUD SUPERIOR
+            //========================
 
-            // char textoNome[80];
-            // sprintf(textoNome, "Jogador: %s", jogo->nomeJogador);
-            // DrawText(textoNome, 30, 75, 24, DARKBROWN);
+            char textoHud[100];
 
-            // char textoDinheiro[80];
-            // sprintf(textoDinheiro, "Dinheiro: R$ %d", jogo->dinheiro);
-            // DrawText(textoDinheiro, 30, 110, 24, DARKBROWN);
+            DrawRectangleRounded(
+                (Rectangle){360, 10, 560, 55},
+                0.25f,
+                10,
+                Fade(RAYWHITE, 0.88f)
+            );
 
-            // char textoMeta[80];
-            // sprintf(textoMeta, "Meta: R$ %d", META_DINHEIRO);
-            // DrawText(textoMeta, 30, 145, 24, DARKBROWN);
+            DrawRectangleRoundedLines(
+                (Rectangle){360, 10, 560, 55},
+                0.25f,
+                10,
+                DARKBROWN
+            );
 
-            // char textoTempo[80];
-            // sprintf(textoTempo, "Tempo: %.0f", jogo->tempoTurno);
-            // DrawText(textoTempo, largura - 180, 30, 24, DARKBROWN);
+            sprintf(textoHud, "Jogador: %s", jogo->nomeJogador);
+            DrawText(textoHud, 380, 27, 22, DARKBROWN);
+
+            sprintf(textoHud, "R$ %d / %d", jogo->dinheiro, META_DINHEIRO);
+            DrawText(textoHud, 610, 27, 22, DARKBROWN);
+
+            sprintf(textoHud, "Tempo: %.0f", jogo->tempoTurno);
+            DrawText(textoHud, 760, 27, 22, DARKBROWN);
+
+            //========================
+            // ITENS PRONTOS
+            //========================
+
+            int cafeX = 230;
+            int cafeY = 315;
+
+            int tapiocaX = 210;
+            int tapiocaY = 365;
+
+            int goiabadaX = 195;
+            int goiabadaY = 410;
+
+            int chocolateX = 175;
+            int chocolateY = 460;
+
+            //========================
+            // CAFE
+            //========================
+
+            DrawTextureEx(
+                jogo->iconCafe,
+                (Vector2){cafeX, cafeY},
+                0,
+                0.055f,
+                WHITE
+            );
+
+            sprintf(textoInventario, "x%d", jogo->qtdCafe);
+
+            DrawText(
+                textoInventario,
+                cafeX + 60,
+                cafeY + 18,
+                22,
+                WHITE
+            );
+
+            //========================
+            // TAPIOCA
+            //========================
+
+            DrawTextureEx(
+                jogo->iconTapioca,
+                (Vector2){tapiocaX, tapiocaY},
+                0,
+                0.075f,
+                WHITE
+            );
+
+            sprintf(textoInventario, "x%d", jogo->qtdTapioca);
+
+            DrawText(
+                textoInventario,
+                tapiocaX + 60,
+                tapiocaY + 18,
+                22,
+                WHITE
+            );
+
+            //========================
+            // BOLO GOIABADA
+            //========================
+
+            DrawTextureEx(
+                jogo->iconBoloGoiabada,
+                (Vector2){goiabadaX, goiabadaY},
+                0,
+                0.075f,
+                WHITE
+            );
+
+            sprintf(textoInventario, "x%d", jogo->qtdBoloGoiabada);
+
+            DrawText(
+                textoInventario,
+                goiabadaX + 60,
+                goiabadaY + 18,
+                22,
+                WHITE
+            );
+
+            //========================
+            // BOLO CHOCOLATE
+            //========================
+
+            DrawTextureEx(
+                jogo->iconBoloChocolate,
+                (Vector2){chocolateX, chocolateY},
+                0,
+                0.075f,
+                WHITE
+            );
+
+            sprintf(textoInventario, "x%d", jogo->qtdBoloChocolate);
+
+            DrawText(
+                textoInventario,
+                chocolateX + 60,
+                chocolateY + 18,
+                22,
+                WHITE
+            );
 
             desenharClientes(jogo, jogo->listaClientes);
 
-            char textoInventario[80];
+            if (jogo->tempoAviso > 0){
+                int larguraTexto = MeasureText(jogo->aviso, 42);
 
-            // sprintf(textoInventario, "Tapiocas: %d", jogo->qtdTapioca);
-            // DrawText(textoInventario, largura - 220, 90, 22, DARKBROWN);
+                int caixaLargura = larguraTexto + 80;
+                int caixaAltura = 90;
 
-            // sprintf(textoInventario, "Bolo goiabada: %d", jogo->qtdBoloGoiabada);
-            // DrawText(textoInventario, largura - 220, 120, 22, DARKBROWN);
+                int caixaX = GetScreenWidth()/2 - caixaLargura/2;
+                int caixaY = GetScreenHeight()/2 - caixaAltura/2;
 
-            // sprintf(textoInventario, "Bolo chocolate: %d", jogo->qtdBoloChocolate);
-            // DrawText(textoInventario, largura - 220, 150, 22, DARKBROWN);
-
-            // sprintf(textoInventario, "Cafe: %d", jogo->qtdCafe);
-            // DrawText(textoInventario, largura - 220, 60, 22, DARKBROWN);
-
-            if (jogo->tempoAviso > 0)
-            {
-                int larguraTexto = MeasureText(jogo->aviso, 28);
-
-                DrawRectangle(
-                    GetScreenWidth() / 2 - larguraTexto / 2 - 20,
-                    20,
-                    larguraTexto + 40,
-                    50,
-                    Fade(BLACK, 0.7f));
+                DrawRectangleRounded(
+                    (Rectangle){caixaX, caixaY, caixaLargura, caixaAltura},
+                    0.2f,
+                    10,
+                    Fade(BLACK, 0.80f)
+                );
+                DrawRectangleRoundedLines(
+                    (Rectangle){caixaX, caixaY, caixaLargura, caixaAltura},
+                    0.2f,
+                    10,
+                    RED
+                );
                 DrawText(
                     jogo->aviso,
-                    GetScreenWidth() / 2 - larguraTexto / 2,
-                    32,
-                    28,
-                    RED);
+                    GetScreenWidth()/2 - larguraTexto/2,
+                    caixaY + 26,
+                    42,
+                    RED
+                );
             }
+
+            Texture2D texturaFrigideira;
+            if(jogo->cozinha.fogao.estado == TAPIOCA_VAZIA){
+                texturaFrigideira = jogo->frigideiraVazia;
+            }
+            else if(jogo->cozinha.fogao.estado == TAPIOCA_CRUA){
+                texturaFrigideira = jogo->frigideiraCrua;
+            }
+            else if(jogo->cozinha.fogao.estado == TAPIOCA_NO_PONTO){
+                texturaFrigideira = jogo->frigideiraBoa;
+            }
+            else{
+                texturaFrigideira = jogo->frigideiraQueimada;
+            }
+            DrawTextureEx(
+                texturaFrigideira,
+                (Vector2){707, 380},
+                0,
+                0.24f,
+                WHITE
+            );
+            
             DrawRectangleLinesEx(jogo->cozinha.fogao.areaInteracao, 3, RED);
 
             DrawRectangleLinesEx(jogo->cozinha.forno.areaInteracao, 3, BLUE);
