@@ -776,42 +776,56 @@ void desenharJogo(Jogo *jogo)
         //======================================================================================
         else if (jogo->telaAtual == TELA_RANKING)
         {
-            int largura = GetScreenWidth();
-            DrawText(
-                "RANKING",
-                largura / 2 - 100,
-                50,
-                50,
-                DARKBROWN);
+            DrawTexture(jogo->texturaRanking, 0, 0, WHITE);
+
             JogadorRanking ranking[MAX_RANKING];
             int quantidade = carregarRanking(ranking);
 
             ordenarRanking(ranking, quantidade);
 
-            int y = 140;
+            int y = 205;
 
-            for (int i = 0; i < quantidade && i < 10; i++)
+            for(int i = 0; i < quantidade && i < 10; i++)
             {
                 char texto[100];
+
                 sprintf(
                     texto,
                     "%d. %s - R$ %d",
                     i + 1,
                     ranking[i].nome,
-                    ranking[i].pontuacao);
+                    ranking[i].pontuacao
+                );
+
                 DrawText(
                     texto,
-                    largura / 2 - 180,
+                    455,
                     y,
-                    28,
-                    MAROON);
-                y += 40;
+                    30,
+                    WHITE
+                );
+
+                y += 42;
             }
+
             DrawText(
-                "Pressione ENTER para voltar ao menu",
-                largura / 2 - 170,
-                y + 40,
+                "Pressione ENTER para voltar",
+                470,
+                670,
                 24,
-                DARKBROWN);
+                WHITE
+            );
+        }
+        else if (jogo->telaAtual == TELA_CREDITOS)
+        {
+            DrawTexture(jogo->texturaTelaCreditos, 0, 0, WHITE);
+
+            DrawText(
+                "Pressione ENTER para voltar",
+                470,
+                670,
+                24,
+                WHITE
+            );
         }
     }

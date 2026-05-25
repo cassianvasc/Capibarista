@@ -33,6 +33,10 @@ typedef struct Jogo{
 
     Texture2D texturaTelaNome;
 
+    Texture2D texturaTelaCreditos;
+
+    Texture2D texturaRanking;
+
     Texture2D clienteAlceu;
     Texture2D clienteCaboclo;
     Texture2D clienteChico;
