@@ -663,7 +663,9 @@ void desenharJogo(Jogo *jogo)
                     RED
                 );
             }
-
+            //==============================================
+            //             desenho frigideira 
+            // =============================================
             Texture2D texturaFrigideira;
             if(jogo->cozinha.fogao.estado == TAPIOCA_VAZIA){
                 texturaFrigideira = jogo->frigideiraVazia;
@@ -685,11 +687,39 @@ void desenharJogo(Jogo *jogo)
                 WHITE
             );
             
-            DrawRectangleLinesEx(jogo->cozinha.fogao.areaInteracao, 3, RED);
-
-            DrawRectangleLinesEx(jogo->cozinha.forno.areaInteracao, 3, BLUE);
-
             DrawRectangleLinesEx(jogo->cozinha.cafe.areaInteracao, 3, GREEN);
+        
+        //==============================================
+        //               desenho forno
+        // =============================================
+
+        Texture2D texturaForno;
+        if(jogo->cozinha.forno.estado == FORNO_VAZIO)
+        {
+            texturaForno = jogo->fornoDesligado;
+        }
+        else if(jogo->cozinha.forno.estado == BOLO_ASSANDO)
+        {
+            texturaForno = jogo->fornoCru;
+        }
+        else if(jogo->cozinha.forno.estado == BOLO_PRONTO)
+        {
+            texturaForno = jogo->fornoPronto;
+        }
+        else
+        {
+            texturaForno = jogo->fornoQueimado;
+        }
+
+        DrawTexturePro(
+            texturaForno,
+            (Rectangle){0, 0, texturaForno.width, texturaForno.height},
+            (Rectangle){810, 538, 230, 100},
+            (Vector2){0, 0},
+            0,
+            WHITE
+        );
+
         }
 
         //======================================================================================

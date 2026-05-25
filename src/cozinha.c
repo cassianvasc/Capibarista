@@ -5,12 +5,12 @@ void inicializarCozinha(Cozinha *cozinha)
     // Inicializa a Tapioca no Fogão
     cozinha->fogao.estado = TAPIOCA_VAZIA;
     cozinha->fogao.tempoNoFogo = 0.0f;
-    cozinha->fogao.areaInteracao = (Rectangle){715, 345, 175, 145}; // Exemplo de posição
+    cozinha->fogao.areaInteracao = (Rectangle){718, 395, 120, 90};
 
     // Inicializa o Bolo no Forno
     cozinha->forno.estado = FORNO_VAZIO;
     cozinha->forno.tempoNoForno = 0.0f;
-    cozinha->forno.areaInteracao = (Rectangle){835, 525, 160, 170}; // Exemplo de posição
+    cozinha->forno.areaInteracao = (Rectangle){810, 540, 230, 100};
 
     //Inicializa café na maquina
     cozinha->cafe.estado = CAFE_MAQUINA_VAZIA;
@@ -80,11 +80,6 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
                 cozinha->forno.sabor = BOLO_CHOCOLATE;
             }
         }
-        else if (cozinha->forno.estado == BOLO_PRONTO)
-        {
-            // nao faz nada aqui
-            // quem pega o bolo pronto sera o jogo.c
-        }
         else if (cozinha->forno.estado == BOLO_QUEIMADO)
         {
             // Jogador limpa o forno (joga no lixo)
@@ -125,75 +120,11 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
             cozinha->fogao.penalidadeAplicada = false;
             
         }
-        else if (cozinha->fogao.estado == TAPIOCA_NO_PONTO)
-        {
-            // nao faz nada aqui
-            // quem pega a tapioca pronta sera o jogo.c
-        }
         else if (cozinha->fogao.estado == TAPIOCA_QUEIMADA)
         {
-            
             cozinha->fogao.estado = TAPIOCA_VAZIA;
             cozinha->fogao.tempoNoFogo = 0.0f;
             cozinha->fogao.penalidadeAplicada = false;
         }
-    }
-}
-
-void desenharCozinha(Cozinha *cozinha) {
-    // --- DESENHAR FOGÃO (TAPIOCA) ---
-    DrawRectangleRec(cozinha->fogao.areaInteracao, DARKGRAY); // Fundo do fogão
-    
-    switch(cozinha->fogao.estado) {
-        case TAPIOCA_VAZIA:
-            DrawText("Frigideira vazia", cozinha->fogao.areaInteracao.x + 20, cozinha->fogao.areaInteracao.y + 40, 20, LIGHTGRAY);
-            break;
-        case TAPIOCA_CRUA:
-            DrawRectangleRec(cozinha->fogao.areaInteracao, WHITE);
-            DrawText("Crua", cozinha->fogao.areaInteracao.x + 25, cozinha->fogao.areaInteracao.y + 40, 20, BLACK);
-            break;
-        case TAPIOCA_NO_PONTO:
-            DrawRectangleRec(cozinha->fogao.areaInteracao, YELLOW);
-            DrawText("Pronta!", cozinha->fogao.areaInteracao.x + 15, cozinha->fogao.areaInteracao.y + 40, 20, BLACK);
-            break;
-        case TAPIOCA_QUEIMADA:
-            DrawRectangleRec(cozinha->fogao.areaInteracao, BLACK);
-            DrawText("Queimou", cozinha->fogao.areaInteracao.x + 10, cozinha->fogao.areaInteracao.y + 40, 20, RED);
-            break;
-    }
-
-    // --- DESENHAR FORNO (BOLO) ---
-    DrawRectangleRec(cozinha->forno.areaInteracao, DARKGRAY); // Fundo do forno
-    
-    switch(cozinha->forno.estado) {
-        case FORNO_VAZIO:
-            DrawText("Forno vazio", cozinha->forno.areaInteracao.x + 20, cozinha->forno.areaInteracao.y + 40, 20, LIGHTGRAY);
-            break;
-        case BOLO_ASSANDO:
-            DrawRectangleRec(cozinha->forno.areaInteracao, ORANGE);
-            DrawText("Assando", cozinha->forno.areaInteracao.x + 10, cozinha->forno.areaInteracao.y + 40, 20, BLACK);
-            break;
-        case BOLO_PRONTO:
-            DrawRectangleRec(cozinha->forno.areaInteracao, BROWN);
-            DrawText("Pronto!", cozinha->forno.areaInteracao.x + 15, cozinha->forno.areaInteracao.y + 40, 20, WHITE);
-            break;
-        case BOLO_QUEIMADO:
-            DrawRectangleRec(cozinha->forno.areaInteracao, BLACK);
-            DrawText("Queimou", cozinha->forno.areaInteracao.x + 10, cozinha->forno.areaInteracao.y + 40, 20, RED);
-            break;
-    }
-    DrawRectangleRec(cozinha->cafe.areaInteracao, DARKBROWN);
-
-    switch(cozinha->cafe.estado){
-        case CAFE_MAQUINA_VAZIA:
-            DrawText("Cafe", cozinha->cafe.areaInteracao.x + 25, cozinha->cafe.areaInteracao.y + 40, 20, LIGHTGRAY);
-            break;
-        case CAFE_PREPARANDO:
-            DrawText("Passando", cozinha->cafe.areaInteracao.x + 15, cozinha->cafe.areaInteracao.y + 40, 20, WHITE);
-            break;
-        case CAFE_PRONTO:
-            DrawRectangleRec(cozinha->cafe.areaInteracao, BROWN);
-            DrawText("Pronto", cozinha->cafe.areaInteracao.x + 15, cozinha->cafe.areaInteracao.y + 40, 20, WHITE);
-            break;
     }
 }

@@ -32,7 +32,7 @@ typedef struct Jogo{
     Texture2D texturaFundoJogo;
 
     Texture2D texturaTelaNome;
-    
+
     Texture2D clienteAlceu;
     Texture2D clienteCaboclo;
     Texture2D clienteChico;
@@ -42,6 +42,10 @@ typedef struct Jogo{
     Texture2D frigideiraCrua;
     Texture2D frigideiraBoa;
     Texture2D frigideiraQueimada;
+    Texture2D fornoDesligado;
+    Texture2D fornoCru;
+    Texture2D fornoPronto;
+    Texture2D fornoQueimado;
     
     Texture2D btnNormalJogar;
     Texture2D btnHoverJogar;

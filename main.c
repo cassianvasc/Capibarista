@@ -31,6 +31,10 @@ int main(){
     jogo.frigideiraCrua = LoadTexture("assets/frigideiracrua.png");
     jogo.frigideiraBoa = LoadTexture("assets/frigideiraboa.png");
     jogo.frigideiraQueimada = LoadTexture("assets/frigideiraqueimada.png");
+    jogo.fornoDesligado = LoadTexture("assets/fornodesligado.png");
+    jogo.fornoCru = LoadTexture("assets/fornocru.png");
+    jogo.fornoPronto = LoadTexture("assets/fornoligado.png");
+    jogo.fornoQueimado = LoadTexture("assets/fornoqueimado.png");
 
 
 // ==========================================================================================================================
@@ -76,6 +80,10 @@ int main(){
     UnloadTexture(jogo.frigideiraCrua);
     UnloadTexture(jogo.frigideiraBoa);
     UnloadTexture(jogo.frigideiraQueimada);
+    UnloadTexture(jogo.fornoDesligado);
+    UnloadTexture(jogo.fornoCru);
+    UnloadTexture(jogo.fornoPronto);
+    UnloadTexture(jogo.fornoQueimado);
 
 
     CloseWindow();
