@@ -15,7 +15,16 @@ int main(){
     inicializarJogo(&jogo);
     
     jogo.texturaMenu = LoadTexture("assets/Menu.png");
+
     jogo.texturaFundoJogo = LoadTexture("assets/TelaJogo.png");
+    jogo.iconCafe = LoadTexture("assets/copocheio.png");
+    jogo.iconTapioca = LoadTexture("assets/pratotapioca.png");
+    jogo.iconBoloGoiabada = LoadTexture("assets/pratogoiabada.png");
+    jogo.iconBoloChocolate = LoadTexture("assets/pratochocolate.png");
+    jogo.clienteAlceu = LoadTexture("assets/alceu.png");
+    jogo.clienteCaboclo = LoadTexture("assets/caboclo.png");
+    jogo.clienteChico = LoadTexture("assets/chico.png");
+    jogo.clienteNatacha = LoadTexture("assets/natacha.png");
 
 // ==========================================================================================================================
 // Menu - Carregamento das texturas dos botões
@@ -48,6 +57,16 @@ int main(){
     UnloadTexture(jogo.btnNormalCreditos);
     UnloadTexture(jogo.btnHoverCreditos);
     UnloadTexture(jogo.texturaFundoJogo);
+    UnloadTexture(jogo.iconCafe);
+    UnloadTexture(jogo.iconTapioca);
+    UnloadTexture(jogo.iconBoloGoiabada);
+    UnloadTexture(jogo.iconBoloChocolate);
+    UnloadTexture(jogo.clienteAlceu);
+    UnloadTexture(jogo.clienteCaboclo);
+    UnloadTexture(jogo.clienteChico);
+    UnloadTexture(jogo.clienteNatacha);
+
+
     CloseWindow();
     return 0;
 }

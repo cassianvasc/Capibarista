@@ -8,6 +8,7 @@ typedef struct Jogo{
     TelaJogo telaAtual;
     Cliente *listaClientes;
     Cozinha cozinha;
+
     int proximoIdCliente;
     int dinheiro;
     float tempoTurno;
@@ -21,8 +22,19 @@ typedef struct Jogo{
     int qtdCafe;
     char aviso[100];
     float tempoAviso;
+
+    // Imagens do jogo
+    Texture2D iconCafe;
+    Texture2D iconTapioca;
+    Texture2D iconBoloGoiabada;
+    Texture2D iconBoloChocolate;
     Texture2D texturaMenu;
     Texture2D texturaFundoJogo;
+    Texture2D clienteAlceu;
+    Texture2D clienteCaboclo;
+    Texture2D clienteChico;
+    Texture2D clienteNatacha;
+
     Texture2D btnNormalJogar;
     Texture2D btnHoverJogar;
     Texture2D btnNormalRanking;
@@ -39,7 +51,7 @@ void desenharJogo(Jogo *jogo);
 
 void atualizarPacienciaClientes(Cliente *lista, float dt);
 
-void desenharClientes(Cliente *lista);
+void desenharClientes(Jogo *jogo, Cliente *lista);
 
 
 
