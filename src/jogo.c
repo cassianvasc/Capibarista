@@ -255,44 +255,74 @@ void atualizarJogo(Jogo *jogo)
 //----------------------------------------------------------------------------------------------------------------------------
 void desenharClientes(Cliente *lista)
 {
-
     Cliente *aux = lista;
-    int x = 30;
-    int y = 260;
+
+    int x = 150;
+    int y = 110;
 
     while (aux != NULL)
     {
+        // corpo/cartão provisório do cliente
+        DrawRectangleRounded(
+            (Rectangle){x, y, 145, 165},
+            0.2f,
+            10,
+            Fade(RAYWHITE, 0.90f)
+        );
 
-        DrawRectangle(x, y, 160, 130, BEIGE);
-        DrawRectangleLines(x, y, 160, 130, DARKBROWN);
+        DrawRectangleRoundedLines(
+            (Rectangle){x, y, 145, 165},
+            0.2f,
+            10,
+            DARKBROWN
+        );
 
+        // nome do cliente
         char textoId[30];
         sprintf(textoId, "Cliente %d", aux->id);
-        DrawText(textoId, x + 10, y + 10, 20, DARKBROWN);
+        DrawText(textoId, x + 18, y + 15, 20, DARKBROWN);
 
+        // barra de paciência
         float porcentagem = aux->pacienciaAtual / aux->pacienciaMaxima;
-        DrawRectangle(x + 10, y + 35, 120, 10, LIGHTGRAY);
-        DrawRectangle(x + 10, y + 35, 120 * porcentagem, 10, GREEN);
 
-        int deslocamento = 55;
+        DrawRectangleRounded(
+            (Rectangle){x + 18, y + 45, 105, 12},
+            0.5f,
+            10,
+            LIGHTGRAY
+        );
+
+        DrawRectangleRounded(
+            (Rectangle){x + 18, y + 45, 105 * porcentagem, 12},
+            0.5f,
+            10,
+            GREEN
+        );
+
+        // pedidos
+        int deslocamento = 75;
 
         if (aux->pedido.cafe)
         {
-            DrawText("Cafe", x + 10, y + deslocamento, 18, MAROON);
-            deslocamento += 22;
+            DrawText("Cafe", x + 18, y + deslocamento, 18, MAROON);
+            deslocamento += 24;
         }
+
         if (aux->pedido.tapioca)
         {
-            DrawText("Tapioca", x + 10, y + deslocamento, 18, MAROON);
-            deslocamento += 22;
+            DrawText("Tapioca", x + 18, y + deslocamento, 18, MAROON);
+            deslocamento += 24;
         }
+
         if (aux->pedido.bolo)
         {
             char textoBolo[50];
             sprintf(textoBolo, "Bolo %s", nomeSaborBolo(aux->pedido.saborBolo));
-            DrawText(textoBolo, x + 10, y + deslocamento, 18, MAROON);
+            DrawText(textoBolo, x + 18, y + deslocamento, 17, MAROON);
         }
-        x += 180;
+
+        x += 175;
+
         aux = aux->prox;
     }
 }
@@ -371,6 +401,8 @@ void desenharJogo(Jogo *jogo)
 
             int largura = GetScreenWidth();
 
+            DrawTexture(jogo->texturaFundoJogo, 0, 0, WHITE);
+
             DrawText("Capibarista", 30, 25, 32, DARKBROWN);
 
             char textoNome[80];
@@ -389,11 +421,7 @@ void desenharJogo(Jogo *jogo)
             sprintf(textoTempo, "Tempo: %.0f", jogo->tempoTurno);
             DrawText(textoTempo, largura - 180, 30, 24, DARKBROWN);
 
-            DrawText("Fila de clientes", 30, 220, 28, MAROON);
             desenharClientes(jogo->listaClientes);
-            DrawText("Cozinha", 30, 420, 28, MAROON);
-
-            desenharCozinha(&jogo->cozinha);
 
             char textoInventario[80];
 
@@ -426,6 +454,11 @@ void desenharJogo(Jogo *jogo)
                     28,
                     RED);
             }
+            DrawRectangleLinesEx(jogo->cozinha.fogao.areaInteracao, 3, RED);
+
+            DrawRectangleLinesEx(jogo->cozinha.forno.areaInteracao, 3, BLUE);
+
+            DrawRectangleLinesEx(jogo->cozinha.cafe.areaInteracao, 3, GREEN);
         }
 
         //======================================================================================

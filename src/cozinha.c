@@ -5,17 +5,17 @@ void inicializarCozinha(Cozinha *cozinha)
     // Inicializa a Tapioca no Fogão
     cozinha->fogao.estado = TAPIOCA_VAZIA;
     cozinha->fogao.tempoNoFogo = 0.0f;
-    cozinha->fogao.areaInteracao = (Rectangle){100, 400, 100, 100}; // Exemplo de posição
+    cozinha->fogao.areaInteracao = (Rectangle){715, 345, 175, 145}; // Exemplo de posição
 
     // Inicializa o Bolo no Forno
     cozinha->forno.estado = FORNO_VAZIO;
     cozinha->forno.tempoNoForno = 0.0f;
-    cozinha->forno.areaInteracao = (Rectangle){250, 400, 100, 100}; // Exemplo de posição
+    cozinha->forno.areaInteracao = (Rectangle){835, 525, 160, 170}; // Exemplo de posição
 
     //Inicializa café na maquina
     cozinha->cafe.estado = CAFE_MAQUINA_VAZIA;
     cozinha->cafe.tempoPreparo = 0.0f;
-    cozinha->cafe.areaInteracao = (Rectangle){400, 400, 100, 100};
+    cozinha->cafe.areaInteracao = (Rectangle){980, 350, 125, 145};
 
     cozinha->fogao.penalidadeAplicada = false;
     cozinha->forno.penalidadeAplicada = false;

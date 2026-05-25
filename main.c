@@ -14,8 +14,8 @@ int main(){
     Jogo jogo;
     inicializarJogo(&jogo);
     
-    jogo.texturaMenu = LoadTexture("assests/Menu.png");
-    jogo.texturaFundoJogo = LoadTexture("assests/background.jpg");
+    jogo.texturaMenu = LoadTexture("assets/Menu.png");
+    jogo.texturaFundoJogo = LoadTexture("assets/TelaJogo.png");
 
 // ==========================================================================================================================
 // Menu - Carregamento das texturas dos botões
@@ -47,6 +47,7 @@ int main(){
     UnloadTexture(jogo.btnHoverRanking);
     UnloadTexture(jogo.btnNormalCreditos);
     UnloadTexture(jogo.btnHoverCreditos);
+    UnloadTexture(jogo.texturaFundoJogo);
     CloseWindow();
     return 0;
 }
