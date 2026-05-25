@@ -4,7 +4,7 @@
 #include "raylib.h"
 #include <stdbool.h>
 
-#define TAM_NOME 32
+#define TAM_NOME 11
 #define DURACAO_TURNO 90.0f
 #define META_DINHEIRO 150
 

@@ -478,30 +478,18 @@ void desenharJogo(Jogo *jogo)
         }
     }
         //======================================================================================
-        else if (jogo->telaAtual == TELA_NOME)
-        {
+        else if (jogo->telaAtual == TELA_NOME){
 
-            int largura = GetScreenWidth();
-            int altura = GetScreenHeight();
-            const char *titulo = "Digite seu nome";
-            int tamanhoTitulo = 40;
-            int larguraTitulo = MeasureText(titulo, tamanhoTitulo);
-
-            DrawText(titulo, largura / 2 - larguraTitulo / 2, altura / 2 - 130, tamanhoTitulo, DARKBROWN);
+            DrawTexture(jogo->texturaTelaNome,0,0,WHITE);
             Rectangle caixaNome = {
-                largura / 2 - 200,
-                altura / 2 - 40,
-                400,
-                60};
-            DrawRectangleRec(caixaNome, RAYWHITE);
-            DrawRectangleLinesEx(caixaNome, 3, DARKBROWN);
-
-            DrawText(jogo->nomeJogador, caixaNome.x + 15, caixaNome.y + 17, 28, DARKBROWN);
-
-            const char *instrucao = "Pressione ENTER para comecar";
-            int larguraInstrucao = MeasureText(instrucao, 22);
-            DrawText(instrucao, largura / 2 - larguraInstrucao / 2, altura / 2 + 50, 22, DARKBROWN);
+                370,
+                345,
+                540,
+                60
+            };
+            DrawText(jogo->nomeJogador,caixaNome.x + 20,caixaNome.y + 15,30,WHITE);
         }
+    
 
         //======================================================================================
         else if (jogo->telaAtual == TELA_JOGO)

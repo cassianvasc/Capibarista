@@ -16,6 +16,8 @@ int main(){
     
     jogo.texturaMenu = LoadTexture("assets/Menu.png");
 
+    jogo.texturaTelaNome = LoadTexture("assets/TelaNome.png");
+
     jogo.texturaFundoJogo = LoadTexture("assets/TelaJogo.png");
     jogo.iconCafe = LoadTexture("assets/copocheio.png");
     jogo.iconTapioca = LoadTexture("assets/pratotapioca.png");
@@ -54,7 +56,7 @@ int main(){
 
     liberarLista(&jogo.listaClientes);
     
-
+    UnloadTexture(jogo.texturaTelaNome);
     UnloadTexture(jogo.btnNormalJogar);
     UnloadTexture(jogo.btnHoverJogar);
     UnloadTexture(jogo.btnNormalRanking);
