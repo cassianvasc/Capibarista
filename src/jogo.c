@@ -458,9 +458,9 @@ void desenharJogo(Jogo *jogo)
         DrawTexture(jogo->texturaMenu, 0, 0, WHITE);
 
 
-        Vector2 posJogar = {760, 310};
-        Vector2 posRanking = {760, 435};
-        Vector2 posCreditos = {760, 560};
+        Vector2 posJogar = {780, 240};
+        Vector2 posRanking = {780, 365};
+        Vector2 posCreditos = {780, 490};
 
         if (botaoImagemClicado(posJogar, jogo->btnNormalJogar, jogo->btnHoverJogar))
         {
