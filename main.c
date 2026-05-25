@@ -19,6 +19,7 @@ int main(){
     jogo.texturaTelaNome = LoadTexture("assets/TelaNome.png");
     jogo.texturaTelaCreditos = LoadTexture("assets/TelaCreditos.png");
     jogo.texturaRanking = LoadTexture("assets/TelaRanking.png");
+    jogo.texturaTelaFim = LoadTexture("assets/TelaFim.png");
 
     jogo.texturaFundoJogo = LoadTexture("assets/TelaJogo.png");
     jogo.iconCafe = LoadTexture("assets/copocheio.png");
@@ -88,6 +89,7 @@ int main(){
     UnloadTexture(jogo.fornoQueimado);
     UnloadTexture(jogo.texturaTelaCreditos);
     UnloadTexture(jogo.texturaRanking);
+    UnloadTexture(jogo.texturaTelaFim);
 
 
     CloseWindow();

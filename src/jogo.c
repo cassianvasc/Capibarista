@@ -725,18 +725,14 @@ void desenharJogo(Jogo *jogo)
         //======================================================================================
         else if (jogo->telaAtual == TELA_FIM)
         {
-
-            int largura = GetScreenWidth();
-            int altura = GetScreenHeight();
+            DrawTexture(jogo->texturaTelaFim, 0, 0, WHITE);
 
             const char *resultado;
 
-            if (jogo->dinheiro >= META_DINHEIRO)
-            {
+            if(jogo->dinheiro >= META_DINHEIRO){
                 resultado = "VOCE VENCEU!";
             }
-            else
-            {
+            else{
                 resultado = "VOCE PERDEU!";
             }
 
@@ -744,33 +740,32 @@ void desenharJogo(Jogo *jogo)
 
             DrawText(
                 resultado,
-                largura / 2 - larguraResultado / 2,
-                altura / 2 - 100,
+                GetScreenWidth()/2 - larguraResultado/2,
+                185,
                 50,
-                DARKBROWN);
+                DARKBROWN
+            );
 
             char textoDinheiro[80];
-
             sprintf(textoDinheiro, "Dinheiro final: R$ %d", jogo->dinheiro);
 
-            int larguraDinheiro = MeasureText(textoDinheiro, 30);
+            int larguraDinheiro = MeasureText(textoDinheiro, 32);
 
             DrawText(
                 textoDinheiro,
-                largura / 2 - larguraDinheiro / 2,
-                altura / 2 - 30,
-                30,
-                MAROON);
-
-            const char *instrucao = "Pressione ENTER para voltar ao menu";
-            int larguraInstrucao = MeasureText(instrucao, 24);
+                GetScreenWidth()/2 - larguraDinheiro/2,
+                285,
+                32,
+                DARKBROWN
+            );
 
             DrawText(
-                instrucao,
-                largura / 2 - larguraInstrucao / 2,
-                altura / 2 + 40,
-                24,
-                DARKBROWN);
+                "Pressione ENTER para voltar ao menu",
+                420,
+                455,
+                26,
+                DARKBROWN
+            );
         }
 
         //======================================================================================
@@ -783,7 +778,7 @@ void desenharJogo(Jogo *jogo)
 
             ordenarRanking(ranking, quantidade);
 
-            int y = 205;
+            int y = 215;
 
             for(int i = 0; i < quantidade && i < 10; i++)
             {
