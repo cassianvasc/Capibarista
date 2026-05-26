@@ -481,7 +481,7 @@ void desenharJogo(Jogo *jogo)
                 540,
                 60
             };
-            DrawText(jogo->nomeJogador,caixaNome.x + 20,caixaNome.y + 15,30,WHITE);
+            DrawText(jogo->nomeJogador,caixaNome.x + 20,caixaNome.y + 15,30,BLACK);
         }
     
 
