@@ -814,7 +814,7 @@ void desenharJogo(Jogo *jogo)
                     455,
                     y,
                     30,
-                    WHITE
+                    BLACK
                 );
 
                 y += 42;
@@ -825,7 +825,7 @@ void desenharJogo(Jogo *jogo)
                 470,
                 670,
                 24,
-                WHITE
+                BLACK
             );
         }
         else if (jogo->telaAtual == TELA_CREDITOS)
