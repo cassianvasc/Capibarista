@@ -1,12 +1,6 @@
 #include "cliente.h"
 #include <stdlib.h>
 
-const char *nomeSaborBolo(SaborBolo sabor){
-    if(sabor == BOLO_GOIABADA) return "goiabada";
-    else if(sabor == BOLO_CHOCOLATE) return "chocolate";
-    else return "nenhum";
-}
-
 Cliente *criarCliente(int id){
     //alocar o espaço pro cliente novo
     Cliente *novo = malloc(sizeof(Cliente));

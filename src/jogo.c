@@ -367,12 +367,6 @@ void desenharClientes(Jogo *jogo, Cliente *lista)
         // PEDIDOS
         //========================
 
-        int qtdItens = 0;
-
-        if(aux->pedido.cafe) qtdItens++;
-        if(aux->pedido.tapioca) qtdItens++;
-        if(aux->pedido.bolo) qtdItens++;
-
         int larguraTotalItens = 0;
 
         if(aux->pedido.cafe) larguraTotalItens += 38;
@@ -494,8 +488,6 @@ void desenharJogo(Jogo *jogo)
         //======================================================================================
         else if (jogo->telaAtual == TELA_JOGO)
         {
-            int largura = GetScreenWidth();
-
             char textoInventario[80];
             DrawTexture(jogo->texturaFundoJogo, 0, 0, WHITE);
 

@@ -36,6 +36,5 @@ typedef struct Cozinha {
 
 void inicializarCozinha(Cozinha *cozinha);
 void atualizarCozinha(Cozinha *cozinha, float dt);
-void desenharCozinha(Cozinha *cozinha);
 
 #endif
