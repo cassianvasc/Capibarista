@@ -38,6 +38,9 @@ int main(){
     jogo.fornoCru = LoadTexture("assets/fornocru.png");
     jogo.fornoPronto = LoadTexture("assets/fornoligado.png");
     jogo.fornoQueimado = LoadTexture("assets/fornoqueimado.png");
+    jogo.cafeteiraVazia = LoadTexture("assets/cafeteira.png");
+    jogo.cafeteiraLigada = LoadTexture("assets/cafeteiraligada.png");
+    jogo.cafeteiraPronta = LoadTexture("assets/cafeteirapronta.png");
 
 
 // ==========================================================================================================================
@@ -87,9 +90,13 @@ int main(){
     UnloadTexture(jogo.fornoCru);
     UnloadTexture(jogo.fornoPronto);
     UnloadTexture(jogo.fornoQueimado);
+    UnloadTexture(jogo.cafeteiraVazia);
+    UnloadTexture(jogo.cafeteiraLigada);
+    UnloadTexture(jogo.cafeteiraPronta);
     UnloadTexture(jogo.texturaTelaCreditos);
     UnloadTexture(jogo.texturaRanking);
     UnloadTexture(jogo.texturaTelaFim);
+
 
 
     CloseWindow();

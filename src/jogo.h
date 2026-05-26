@@ -49,6 +49,9 @@ typedef struct Jogo{
     Texture2D fornoCru;
     Texture2D fornoPronto;
     Texture2D fornoQueimado;
+    Texture2D cafeteiraVazia;
+    Texture2D cafeteiraLigada;
+    Texture2D cafeteiraPronta;
     
     Texture2D btnNormalJogar;
     Texture2D btnHoverJogar;

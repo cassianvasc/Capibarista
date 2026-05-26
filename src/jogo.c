@@ -686,43 +686,68 @@ void desenharJogo(Jogo *jogo)
                 0.24f,
                 WHITE
             );
-            
-            DrawRectangleLinesEx(jogo->cozinha.cafe.areaInteracao, 3, GREEN);
         
         //==============================================
         //               desenho forno
         // =============================================
 
-        Texture2D texturaForno;
-        if(jogo->cozinha.forno.estado == FORNO_VAZIO)
-        {
-            texturaForno = jogo->fornoDesligado;
-        }
-        else if(jogo->cozinha.forno.estado == BOLO_ASSANDO)
-        {
-            texturaForno = jogo->fornoCru;
-        }
-        else if(jogo->cozinha.forno.estado == BOLO_PRONTO)
-        {
-            texturaForno = jogo->fornoPronto;
-        }
-        else
-        {
-            texturaForno = jogo->fornoQueimado;
-        }
+            Texture2D texturaForno;
+            if(jogo->cozinha.forno.estado == FORNO_VAZIO)
+            {
+                texturaForno = jogo->fornoDesligado;
+            }
+            else if(jogo->cozinha.forno.estado == BOLO_ASSANDO)
+            {
+                texturaForno = jogo->fornoCru;
+            }
+            else if(jogo->cozinha.forno.estado == BOLO_PRONTO)
+            {
+                texturaForno = jogo->fornoPronto;
+            }
+            else
+            {
+                texturaForno = jogo->fornoQueimado;
+            }
 
-        DrawTexturePro(
-            texturaForno,
-            (Rectangle){0, 0, texturaForno.width, texturaForno.height},
-            (Rectangle){810, 538, 230, 100},
-            (Vector2){0, 0},
-            0,
-            WHITE
-        );
+            DrawTexturePro(
+                texturaForno,
+                (Rectangle){0, 0, texturaForno.width, texturaForno.height},
+                (Rectangle){810, 538, 230, 100},
+                (Vector2){0, 0},
+                0,
+                WHITE
+            );
+            //==============================================
+            //               desenho cafeteira
+            // =============================================
+
+            Texture2D texturaCafe;
+            if(jogo->cozinha.cafe.estado == CAFE_MAQUINA_VAZIA)
+            {
+                texturaCafe = jogo->cafeteiraVazia;
+            }
+            else if(jogo->cozinha.cafe.estado == CAFE_PREPARANDO)
+            {
+                texturaCafe = jogo->cafeteiraLigada;
+            }
+            else
+            {
+                texturaCafe = jogo->cafeteiraPronta;
+            }
+
+            DrawTexturePro(
+                texturaCafe,
+                (Rectangle){0, 0, texturaCafe.width, texturaCafe.height},
+                (Rectangle){937, 315, 135, 185},
+                (Vector2){0, 0},
+                0,
+                WHITE
+            );
 
         }
 
         //======================================================================================
+
         else if (jogo->telaAtual == TELA_FIM)
         {
             DrawTexture(jogo->texturaTelaFim, 0, 0, WHITE);

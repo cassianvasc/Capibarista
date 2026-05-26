@@ -15,7 +15,7 @@ void inicializarCozinha(Cozinha *cozinha)
     //Inicializa café na maquina
     cozinha->cafe.estado = CAFE_MAQUINA_VAZIA;
     cozinha->cafe.tempoPreparo = 0.0f;
-    cozinha->cafe.areaInteracao = (Rectangle){980, 350, 125, 145};
+    cozinha->cafe.areaInteracao = (Rectangle){932, 312, 145, 190};
 
     cozinha->fogao.penalidadeAplicada = false;
     cozinha->forno.penalidadeAplicada = false;
