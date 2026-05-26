@@ -452,9 +452,9 @@ void desenharJogo(Jogo *jogo)
         DrawTexture(jogo->texturaMenu, 0, 0, WHITE);
 
 
-        Vector2 posJogar = {780, 240};
-        Vector2 posRanking = {780, 365};
-        Vector2 posCreditos = {780, 490};
+        Vector2 posJogar = {880, 290};
+        Vector2 posRanking = {880, 445};
+        Vector2 posCreditos = {880, 590};
 
         if (botaoImagemClicado(posJogar, jogo->btnNormalJogar, jogo->btnHoverJogar))
         {
@@ -476,7 +476,7 @@ void desenharJogo(Jogo *jogo)
 
             DrawTexture(jogo->texturaTelaNome,0,0,WHITE);
             Rectangle caixaNome = {
-                370,
+                570,
                 345,
                 540,
                 60
