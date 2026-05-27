@@ -1,0 +1,66 @@
+# Capibarista
+
+## Sobre o jogo
+
+Capibarista é um jogo de gerenciamento inspirado na cultura urbana recifense. O jogador controla um barista responsável por administrar uma cafeteria regional durante 7 dias da semana. Em cada fase, clientes chegam ao balcão realizando pedidos que devem ser preparados corretamente dentro do tempo limite.
+
+O objetivo do jogo é acumular gorjetas suficientes para atingir a meta da fase e continuar trabalhando na cafeteria.
+
+# Dinâmica do jogo
+
+Durante a partida, os clientes chegam ao balcão com pedidos aleatórios contendo:
+
+-  Café
+-  Tapioca
+-  Bolo de rolo(chocolate ou goiaba)
+
+Os pedidos podem conter:
+- 1, 2 ou 3 itens;
+- Itens repetidos.
+
+Exemplos:
+- Café + Tapioca
+- Café + Café
+- Bolo de rolo de goiaba + Tapioca + Café
+
+O balcão possui limite máximo de 4 clientes simultaneamente.
+
+Cada cliente possui um tempo máximo de espera. Caso esse tempo seja atingido antes da entrega do pedido, o cliente abandona o local e nenhuma gorjeta é recebida.
+
+# Sistema de preparo
+
+Cada alimento possui um processo de preparo e um tempo ideal.
+
+# Sistema de gorjetas
+
+Todos os clientes possuem o mesmo valor base de gorjeta.
+
+A gorjeta pode diminuir caso o cliente espere tempo demais.
+
+Quanto melhor e mais rápido o atendimento, maior será a pontuação final do jogador.
+
+# Progressão das fases
+
+O jogo possui 7 fases, representando os dias da semana.
+
+A cada nova fase:
+- mais clientes aparecem;
+- os pedidos ficam maiores;
+- a dificuldade aumenta;
+- a meta de gorjetas se torna maior.
+
+Caso a meta mínima da fase não seja atingida, o jogador é demitido e o jogo é encerrado.
+
+
+# Estruturas de Dados Utilizadas
+A estrutura de dados principal utilizada no jogo é uma **lista encadeada**, aplicada no gerenciamento dos clientes em atendimento no balcão.
+
+Cada cliente é inserido dinamicamente na lista ao entrar na cafeteria e removido após:
+- receber o pedido;
+- atingir o tempo máximo de espera;
+
+O jogador navega constantemente pelos elementos dessa estrutura durante a gameplay para selecionar clientes, acompanhar pedidos e administrar o atendimento.
+
+Além disso, o jogo utiliza:
+- Vetores auxiliares para controle de pedidos e preparos;
+- Insertion Sort para ordenação do ranking final de pontuações.
