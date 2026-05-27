@@ -452,9 +452,9 @@ void desenharJogo(Jogo *jogo)
         DrawTexture(jogo->texturaMenu, 0, 0, WHITE);
 
 
-        Vector2 posJogar = {880, 290};
+        Vector2 posJogar = {880, 340};
         Vector2 posRanking = {880, 445};
-        Vector2 posCreditos = {880, 590};
+        Vector2 posCreditos = {880, 560};
 
         if (botaoImagemClicado(posJogar, jogo->btnNormalJogar, jogo->btnHoverJogar))
         {
@@ -760,7 +760,7 @@ void desenharJogo(Jogo *jogo)
                 GetScreenWidth()/2 - larguraResultado/2,
                 185,
                 50,
-                DARKBROWN
+                BLACK
             );
 
             char textoDinheiro[80];
@@ -773,7 +773,7 @@ void desenharJogo(Jogo *jogo)
                 GetScreenWidth()/2 - larguraDinheiro/2,
                 285,
                 32,
-                DARKBROWN
+                WHITE
             );
 
             DrawText(
@@ -781,7 +781,7 @@ void desenharJogo(Jogo *jogo)
                 420,
                 455,
                 26,
-                DARKBROWN
+                WHITE
             );
         }
 
