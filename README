@@ -29,7 +29,9 @@ Cada cliente possui um tempo máximo de espera. Caso esse tempo seja atingido an
 
 # Sistema de preparo
 
-Cada alimento possui um processo de preparo e um tempo ideal.
+Cada alimento possui um processo de preparo e um tempo ideal. Para fazer o bolo de chocolate ou goiaba deve-se apertar a tecla (C ou G, respectivamente) e
+clicar no forno. Para a tapioca, deve-se clicar na frigideira, assim como para preparar o café basta clicar na cafeteira. Quando os itens estão prontos podem
+ser clicados para ir para o inventário. Após isso, basta clicar no cliente e o pedido é transferido do inventário.
 
 # Sistema de gorjetas
 
