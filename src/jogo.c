@@ -296,8 +296,23 @@ void desenharClientes(Jogo *jogo, Cliente *lista)
             escalaCliente = 0.50f;
             ajuste = (Vector2){40, -45};
         }
-        else{
+        else if (tipoCliente == 3){
             texturaCliente = jogo->clienteNatacha;
+            escalaCliente = 0.20f;
+            ajuste = (Vector2){35, -45};
+        }
+        else if(tipoCliente== 4){
+            texturaCliente = jogo->clienteSport;
+            escalaCliente = 0.20f;
+            ajuste = (Vector2){35, -45};
+        }
+        else if (tipoCliente == 5){
+            texturaCliente = jogo->clienteNautico;
+            escalaCliente = 0.20f;
+            ajuste = (Vector2){35, -45};
+        }
+        else{
+            texturaCliente = jogo->clienteSanta;
             escalaCliente = 0.20f;
             ajuste = (Vector2){35, -45};
         }

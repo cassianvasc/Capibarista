@@ -40,6 +40,9 @@ typedef struct Jogo{
     Texture2D clienteCaboclo;
     Texture2D clienteChico;
     Texture2D clienteNatacha;
+    Texture2D clienteSport;
+    Texture2D clienteNautico;
+    Texture2D clienteSanta;
 
     Texture2D frigideiraVazia;
     Texture2D frigideiraCrua;

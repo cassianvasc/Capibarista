@@ -28,6 +28,9 @@ int main(){
     jogo.iconBoloChocolate = LoadTexture("assets/pratochocolate.png");
     jogo.clienteAlceu = LoadTexture("assets/alceu.png");
     jogo.clienteCaboclo = LoadTexture("assets/caboclo.png");
+    jogo.clienteSport = LoadTexture("assets/torcedorsport.png");
+    jogo.clienteSanta = LoadTexture("assets/torcedorasanta.png");
+    jogo.clienteNautico = LoadTexture("assets/torcedoranautico.png");
     jogo.clienteChico = LoadTexture("assets/chico.png");
     jogo.clienteNatacha = LoadTexture("assets/natacha.png");
     jogo.frigideiraVazia = LoadTexture("assets/frigideiravazia.png");
