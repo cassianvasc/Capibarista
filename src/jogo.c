@@ -19,7 +19,7 @@ void inicializarJogo(Jogo *jogo)
     jogo->nomeJogador[0] = '\0';
     jogo->tamanhoNome = 0;
     jogo->tempoSpawn = 0;
-    jogo->intervaloSpawn = 5.0f;
+    jogo->intervaloSpawn = 8.0f;
     jogo->qtdTapioca = 0;
     jogo->qtdBoloGoiabada = 0;
     jogo->qtdBoloChocolate = 0;
@@ -220,7 +220,7 @@ void atualizarJogo(Jogo *jogo)
                 cliente = cliente->prox;
             }
         }
-        if (jogo->tempoSpawn >= jogo->intervaloSpawn)
+        if (jogo->tempoSpawn >= jogo->intervaloSpawn && contarClientes(jogo->listaClientes) < MAX_CLIENTES_TELA)
         {
 
             Cliente *novo = criarCliente(jogo->proximoIdCliente);

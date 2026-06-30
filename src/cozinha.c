@@ -56,7 +56,7 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
             cozinha->forno.estado = BOLO_PRONTO;
         }
         // Se ficou pronto e ficou mais 4 segundos (9 no total), queima
-        else if (cozinha->forno.estado == BOLO_PRONTO && cozinha->forno.tempoNoForno >= 9.0f)
+        else if (cozinha->forno.estado == BOLO_PRONTO && cozinha->forno.tempoNoForno >= 13.0f)
         {
             cozinha->forno.estado = BOLO_QUEIMADO;
 
@@ -103,7 +103,7 @@ void atualizarCozinha(Cozinha *cozinha, float dt)
             cozinha->fogao.estado = TAPIOCA_NO_PONTO;
         }
         // Se ficou no ponto e ficou mais 2 segundos (5 no total), queima
-        else if (cozinha->fogao.estado == TAPIOCA_NO_PONTO && cozinha->fogao.tempoNoFogo >= 5.0f)
+        else if (cozinha->fogao.estado == TAPIOCA_NO_PONTO && cozinha->fogao.tempoNoFogo >= 8.0f)
         {
             cozinha->fogao.estado = TAPIOCA_QUEIMADA;
 

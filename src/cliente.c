@@ -41,8 +41,8 @@ Cliente *criarCliente(int id){
         novo->pedido.saborBolo = BOLO_NENHUM;
     }
 
-    novo->pacienciaAtual = 25.0f;
-    novo->pacienciaMaxima = 25.0f;
+    novo->pacienciaAtual = 40.0f;
+    novo->pacienciaMaxima = 40.0f;
 
     novo->prox = NULL;
     return novo;

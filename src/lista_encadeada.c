@@ -31,17 +31,16 @@ void removerClienteEspecifico(Cliente **lista, Cliente *clienteRemover){
     if(*lista == NULL || clienteRemover == NULL){
         return;
     }
+    //caso a remoçao seja na head
     if(*lista == clienteRemover){
         Cliente *aux = *lista;
         *lista = (*lista)->prox;
         free(aux);
         return;
     }
+    //senao procuro o anterior ao que sera removido, ligo ele o anterior ao proximo dele e removo ele
     Cliente *anterior = *lista;
-    while(
-        anterior->prox != NULL &&
-        anterior->prox != clienteRemover
-    ){
+    while(anterior->prox != NULL && anterior->prox != clienteRemover){
         anterior = anterior->prox;
     }
     if(anterior->prox == clienteRemover){
@@ -84,6 +83,19 @@ void removerClientesSemPaciencia(Cliente **lista, int *dinheiro, char aviso[], f
             atual = atual->prox;
         }
     }
+}
+
+int contarClientes(Cliente *lista){
+    int total = 0;
+
+    Cliente *aux = lista;
+
+    while(aux != NULL){
+        total++;
+        aux = aux->prox;
+    }
+
+    return total;
 }
 
 void liberarLista(Cliente **lista){
