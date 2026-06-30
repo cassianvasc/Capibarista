@@ -535,6 +535,31 @@ void desenharJogo(Jogo *jogo)
             sprintf(textoHud, "Tempo: %.0f", jogo->tempoTurno);
             DrawText(textoHud, 760, 27, 22, DARKBROWN);
 
+
+            //========================
+            // TUTORIAL
+            //========================
+
+            DrawRectangleRounded(
+                (Rectangle){20, 560, 400, 150},
+                0.2f,
+                10,
+                Fade(RAYWHITE, 0.85f)
+            );
+
+            DrawRectangleRoundedLines(
+                (Rectangle){20, 560, 400, 150},
+                0.2f,
+                10,
+                DARKBROWN
+            );
+
+            DrawText("COMO JOGAR", 40, 575, 22, DARKBROWN);
+            DrawText("Clique nas estacoes para preparar.", 40, 605, 18, DARKBROWN);
+            DrawText("Clique no item pronto para pegar.", 40, 630, 18, DARKBROWN);
+            DrawText("Clique no cliente para entregar.", 40, 655, 18, DARKBROWN);
+            DrawText("Forno: clique = goiabada | C + clique = chocolate", 40, 680, 16, DARKBROWN);
+
             //========================
             // ITENS PRONTOS
             //========================
@@ -638,6 +663,45 @@ void desenharJogo(Jogo *jogo)
                 22,
                 WHITE
             );
+
+            // Status da tapioca
+            if(jogo->cozinha.fogao.estado == TAPIOCA_VAZIA){
+                DrawText("Clique para fazer tapioca", 665, 350, 18, WHITE);
+            }
+            else if(jogo->cozinha.fogao.estado == TAPIOCA_CRUA){
+                DrawText("Preparando...", 705, 350, 18, YELLOW);
+            }
+            else if(jogo->cozinha.fogao.estado == TAPIOCA_NO_PONTO){
+                DrawText("Pronta! Clique para pegar", 655, 350, 18, GREEN);
+            }
+            else{
+                DrawText("Queimou! Clique para limpar", 645, 350, 18, RED);
+            }
+
+            // Status do forno
+            if(jogo->cozinha.forno.estado == FORNO_VAZIO){
+                DrawText("Clique para assar bolo", 820, 650, 18, WHITE);
+            }
+            else if(jogo->cozinha.forno.estado == BOLO_ASSANDO){
+                DrawText("Assando...", 865, 650, 18, YELLOW);
+            }
+            else if(jogo->cozinha.forno.estado == BOLO_PRONTO){
+                DrawText("Pronto! Clique para pegar", 805, 650, 18, GREEN);
+            }
+            else{
+                DrawText("Queimou! Clique para limpar", 800, 650, 18, RED);
+            }
+
+            // Status do café
+            if(jogo->cozinha.cafe.estado == CAFE_MAQUINA_VAZIA){
+                DrawText("Clique para fazer cafe", 920, 285, 18, WHITE);
+            }
+            else if(jogo->cozinha.cafe.estado == CAFE_PREPARANDO){
+                DrawText("Passando cafe...", 935, 285, 18, YELLOW);
+            }
+            else{
+                DrawText("Cafe pronto! Clique", 925, 285, 18, GREEN);
+            }
 
             desenharClientes(jogo, jogo->listaClientes);
 

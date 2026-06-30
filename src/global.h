@@ -5,8 +5,8 @@
 #include <stdbool.h>
 
 #define TAM_NOME 11
-#define DURACAO_TURNO 90.0f
-#define META_DINHEIRO 150
+#define DURACAO_TURNO 120.0f
+#define META_DINHEIRO 100
 #define MAX_CLIENTES_TELA 3
 
 typedef enum TelaJogo{
